@@ -1,0 +1,46 @@
+{
+  "name": "Mr. Saman Perera",
+  "title": "Science Tutor",
+  "photo": "/placeholder.svg",
+  "bio": "With over 15 years of experience teaching Science for O/L students, I am passionate about making complex concepts simple and engaging. My student-centered approach has helped hundreds of students achieve excellent results.",
+  "teachingStyle": "I believe in interactive learning, practical demonstrations, and personalized attention. Every student learns differently, and I adapt my teaching methods to ensure everyone understands the fundamentals.",
+  "achievements": [
+    {
+      "icon": "GraduationCap",
+      "title": "University of Colombo",
+      "description": "B.Sc. in Physics (Hons)"
+    },
+    {
+      "icon": "Award",
+      "title": "15+ Years Experience",
+      "description": "Teaching O/L Science"
+    },
+    {
+      "icon": "Trophy",
+      "title": "Best Tutor Award",
+      "description": "2023 National Education Excellence"
+    }
+  ],
+  "results": {
+    "year": "2024",
+    "grades": {
+      "A": 65,
+      "B": 28,
+      "C": 7
+    }
+  },
+  "testimonials": [
+    {
+      "name": "Nethmi Silva",
+      "grade": "Grade 11 - 2024 O/L",
+      "text": "Sir's teaching methods are amazing! I improved from C to A in just 6 months.",
+      "rating": 5
+    },
+    {
+      "name": "Kavindu Jayasinghe",
+      "grade": "Grade 10",
+      "text": "The best Science teacher I've ever had. Explains everything so clearly!",
+      "rating": 5
+    }
+  ]
+}

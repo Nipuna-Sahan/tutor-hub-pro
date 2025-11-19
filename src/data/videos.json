@@ -1,0 +1,38 @@
+[
+  {
+    "id": "vid-1",
+    "title": "Introduction to Cells - Biology",
+    "description": "Complete lesson on cell structure and functions",
+    "grade": "Grade 10-11",
+    "subject": "Biology",
+    "duration": "45:30",
+    "videoUrl": "https://www.youtube.com/watch?v=example1",
+    "thumbnailUrl": "/placeholder.svg",
+    "uploadDate": "2025-01-05",
+    "views": 245
+  },
+  {
+    "id": "vid-2",
+    "title": "Chemical Reactions Explained",
+    "description": "Understanding different types of chemical reactions",
+    "grade": "Grade 10-11",
+    "subject": "Chemistry",
+    "duration": "38:20",
+    "videoUrl": "https://www.youtube.com/watch?v=example2",
+    "thumbnailUrl": "/placeholder.svg",
+    "uploadDate": "2025-01-08",
+    "views": 189
+  },
+  {
+    "id": "vid-3",
+    "title": "Electricity Basics - Part 1",
+    "description": "Current, voltage, and resistance fundamentals",
+    "grade": "Grade 10-11",
+    "subject": "Physics",
+    "duration": "42:15",
+    "videoUrl": "https://www.youtube.com/watch?v=example3",
+    "thumbnailUrl": "/placeholder.svg",
+    "uploadDate": "2025-01-12",
+    "views": 312
+  }
+]

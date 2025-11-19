@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ann-1",
+    "title": "New O/L Revision Batch Starting February 2025",
+    "content": "Registration is now open for the 2025 O/L Revision Programme. Limited seats available. Early bird discount of 10% until January 31st.",
+    "date": "2025-01-10",
+    "important": true
+  },
+  {
+    "id": "ann-2",
+    "title": "Class Cancellation - January 25th",
+    "content": "Saturday classes on January 25th are cancelled due to a public holiday. Make-up class will be scheduled.",
+    "date": "2025-01-15",
+    "important": true
+  },
+  {
+    "id": "ann-3",
+    "title": "New Video Lessons Available",
+    "content": "New video lessons on Chemical Reactions and Electricity are now available in the LMS.",
+    "date": "2025-01-12",
+    "important": false
+  }
+]

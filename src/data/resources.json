@@ -1,0 +1,56 @@
+[
+  {
+    "id": "notes-1",
+    "title": "Complete O/L Biology Notes",
+    "category": "notes",
+    "grade": "Grade 11",
+    "description": "Comprehensive biology notes covering all O/L topics",
+    "downloadUrl": "#",
+    "uploadDate": "2024-01-15"
+  },
+  {
+    "id": "notes-2",
+    "title": "Physics Formulas & Concepts",
+    "category": "notes",
+    "grade": "Grade 10-11",
+    "description": "Essential physics formulas with solved examples",
+    "downloadUrl": "#",
+    "uploadDate": "2024-01-20"
+  },
+  {
+    "id": "past-1",
+    "title": "2024 O/L Science Past Paper",
+    "category": "past-papers",
+    "grade": "Grade 11",
+    "description": "Latest O/L paper with marking scheme",
+    "downloadUrl": "#",
+    "uploadDate": "2024-02-01"
+  },
+  {
+    "id": "past-2",
+    "title": "2023 O/L Science Past Paper",
+    "category": "past-papers",
+    "grade": "Grade 11",
+    "description": "Complete paper with detailed answers",
+    "downloadUrl": "#",
+    "uploadDate": "2024-01-10"
+  },
+  {
+    "id": "model-1",
+    "title": "Model Paper Series 1",
+    "category": "model-papers",
+    "grade": "Grade 11",
+    "description": "Practice paper following O/L pattern",
+    "downloadUrl": "#",
+    "uploadDate": "2024-01-25"
+  },
+  {
+    "id": "practical-1",
+    "title": "Practical Experiment Guide",
+    "category": "practical-guides",
+    "grade": "Grade 10-11",
+    "description": "Step-by-step practical experiments guide",
+    "downloadUrl": "#",
+    "uploadDate": "2024-01-18"
+  }
+]

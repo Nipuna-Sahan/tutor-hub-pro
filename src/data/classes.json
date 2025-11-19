@@ -1,0 +1,107 @@
+[
+  {
+    "id": "ol-revision-2025",
+    "title": "2025 O/L Revision Programme",
+    "grade": "Grade 11",
+    "description": "Intensive revision programme covering the entire O/L syllabus with past paper discussions and exam strategies.",
+    "syllabus": [
+      "Complete O/L Syllabus Revision",
+      "Past Paper Analysis (2015-2024)",
+      "Structured Essays & MCQ Practice",
+      "Monthly Progress Tests",
+      "Individual Performance Tracking"
+    ],
+    "timetable": [
+      { "day": "Saturday", "time": "8:00 AM - 11:00 AM" },
+      { "day": "Sunday", "time": "8:00 AM - 11:00 AM" }
+    ],
+    "fees": {
+      "monthly": "Rs. 4,500",
+      "term": "Rs. 12,000 (3 months)"
+    },
+    "features": [
+      "Recorded Video Lessons",
+      "Downloadable Notes",
+      "Online Quiz Platform",
+      "WhatsApp Support Group"
+    ]
+  },
+  {
+    "id": "grade-6-7",
+    "title": "Grade 6-7 Foundation Science",
+    "grade": "Grade 6-7",
+    "description": "Building strong scientific fundamentals with hands-on experiments and interactive learning.",
+    "syllabus": [
+      "Introduction to Scientific Method",
+      "Basic Biology Concepts",
+      "Physical Science Fundamentals",
+      "Earth & Environmental Science",
+      "Practical Experiments"
+    ],
+    "timetable": [
+      { "day": "Friday", "time": "4:00 PM - 6:00 PM" }
+    ],
+    "fees": {
+      "monthly": "Rs. 2,500",
+      "term": "Rs. 7,000 (3 months)"
+    },
+    "features": [
+      "Interactive Whiteboard Sessions",
+      "Practical Demonstrations",
+      "Fun Science Activities",
+      "Parent Progress Reports"
+    ]
+  },
+  {
+    "id": "grade-8-9",
+    "title": "Grade 8-9 Advanced Science",
+    "grade": "Grade 8-9",
+    "description": "Comprehensive coverage of middle school science curriculum with focus on concept clarity.",
+    "syllabus": [
+      "Biology: Cells, Human Body Systems",
+      "Chemistry: Matter, Chemical Reactions",
+      "Physics: Motion, Energy, Electricity",
+      "Ecology & Environmental Studies",
+      "Regular Term Tests"
+    ],
+    "timetable": [
+      { "day": "Saturday", "time": "2:00 PM - 5:00 PM" }
+    ],
+    "fees": {
+      "monthly": "Rs. 3,500",
+      "term": "Rs. 9,500 (3 months)"
+    },
+    "features": [
+      "Weekly Quiz Sessions",
+      "Model Paper Practice",
+      "Video Recordings Available",
+      "Monthly Parent Meetings"
+    ]
+  },
+  {
+    "id": "grade-10",
+    "title": "Grade 10 O/L Preparation",
+    "grade": "Grade 10",
+    "description": "Early O/L preparation focusing on building strong fundamentals and exam techniques.",
+    "syllabus": [
+      "Complete Grade 10 Syllabus",
+      "Introduction to O/L Paper Pattern",
+      "MCQ & Structured Question Practice",
+      "Practical Skills Development",
+      "Monthly Assessment Tests"
+    ],
+    "timetable": [
+      { "day": "Sunday", "time": "2:00 PM - 5:00 PM" }
+    ],
+    "fees": {
+      "monthly": "Rs. 4,000",
+      "term": "Rs. 11,000 (3 months)"
+    },
+    "features": [
+      "Online LMS Access",
+      "Past Paper Library",
+      "One-on-One Doubt Clearing",
+      "Performance Analytics"
+    ]
+  }
+]
