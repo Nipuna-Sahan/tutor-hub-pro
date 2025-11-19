@@ -38,6 +38,9 @@ export const Navbar = () => {
             <Link to="/lms">
               <Button size="sm">Student Login</Button>
             </Link>
+            <Link to="/admin">
+              <Button size="sm" variant="outline">Admin</Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -97,6 +100,11 @@ export const Navbar = () => {
             <Link to="/lms" onClick={() => setMobileMenuOpen(false)}>
               <Button className="w-full" size="sm">
                 Student Login
+              </Button>
+            </Link>
+            <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>
+              <Button className="w-full" size="sm" variant="outline">
+                Admin
               </Button>
             </Link>
           </div>

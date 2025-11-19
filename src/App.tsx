@@ -10,8 +10,32 @@ import ClassDetail from "./pages/ClassDetail";
 import Resources from "./pages/Resources";
 import Payment from "./pages/Payment";
 import Contact from "./pages/Contact";
-import LMS from "./pages/LMS";
 import NotFound from "./pages/NotFound";
+
+// Admin Pages
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminStudents from "./pages/admin/AdminStudents";
+import AdminClasses from "./pages/admin/AdminClasses";
+import AdminResources from "./pages/admin/AdminResources";
+import AdminAnnouncements from "./pages/admin/AdminAnnouncements";
+import AdminPapers from "./pages/admin/AdminPapers";
+import AdminMarks from "./pages/admin/AdminMarks";
+import AdminAttendance from "./pages/admin/AdminAttendance";
+import AdminPayments from "./pages/admin/AdminPayments";
+import AdminVideos from "./pages/admin/AdminVideos";
+
+// LMS Pages
+import LMSLayout from "./pages/lms/LMSLayout";
+import LMSDashboard from "./pages/lms/LMSDashboard";
+import LMSVideos from "./pages/lms/LMSVideos";
+import LMSResources from "./pages/lms/LMSResources";
+import LMSQuizzes from "./pages/lms/LMSQuizzes";
+import LMSAttendance from "./pages/lms/LMSAttendance";
+import LMSAssignments from "./pages/lms/LMSAssignments";
+import LMSAnnouncements from "./pages/lms/LMSAnnouncements";
+import LMSPerformance from "./pages/lms/LMSPerformance";
+import LMSProfile from "./pages/lms/LMSProfile";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +46,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/classes" element={<Classes />} />
@@ -29,8 +54,35 @@ const App = () => (
           <Route path="/resources" element={<Resources />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/lms" element={<LMS />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="students" element={<AdminStudents />} />
+            <Route path="classes" element={<AdminClasses />} />
+            <Route path="resources" element={<AdminResources />} />
+            <Route path="announcements" element={<AdminAnnouncements />} />
+            <Route path="papers" element={<AdminPapers />} />
+            <Route path="marks" element={<AdminMarks />} />
+            <Route path="attendance" element={<AdminAttendance />} />
+            <Route path="payments" element={<AdminPayments />} />
+            <Route path="videos" element={<AdminVideos />} />
+          </Route>
+          
+          {/* LMS Routes */}
+          <Route path="/lms" element={<LMSLayout />}>
+            <Route index element={<LMSDashboard />} />
+            <Route path="videos" element={<LMSVideos />} />
+            <Route path="resources" element={<LMSResources />} />
+            <Route path="quizzes" element={<LMSQuizzes />} />
+            <Route path="attendance" element={<LMSAttendance />} />
+            <Route path="assignments" element={<LMSAssignments />} />
+            <Route path="announcements" element={<LMSAnnouncements />} />
+            <Route path="performance" element={<LMSPerformance />} />
+            <Route path="profile" element={<LMSProfile />} />
+          </Route>
+          
+          {/* 404 Route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
