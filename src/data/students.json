@@ -1,0 +1,26 @@
+[
+  {
+    "id": "std-001",
+    "name": "Sithumi Fernando",
+    "email": "sithumi@example.com",
+    "phone": "0771234567",
+    "grade": "Grade 11",
+    "class": "2025 O/L Revision",
+    "joinedDate": "2024-12-01",
+    "attendance": 95,
+    "totalPapers": 12,
+    "averageScore": 78
+  },
+  {
+    "id": "std-002",
+    "name": "Ravindu Silva",
+    "email": "ravindu@example.com",
+    "phone": "0779876543",
+    "grade": "Grade 10",
+    "class": "Grade 10 O/L Preparation",
+    "joinedDate": "2024-11-15",
+    "attendance": 88,
+    "totalPapers": 8,
+    "averageScore": 72
+  }
+]

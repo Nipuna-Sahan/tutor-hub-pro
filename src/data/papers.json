@@ -1,0 +1,29 @@
+[
+  {
+    "id": "paper-1",
+    "title": "2024 O/L Science Past Paper",
+    "type": "past-paper",
+    "grade": "Grade 11",
+    "totalMarks": 100,
+    "duration": "3 hours",
+    "uploadDate": "2024-12-20"
+  },
+  {
+    "id": "paper-2",
+    "title": "Monthly Test - January 2025",
+    "type": "monthly-test",
+    "grade": "Grade 11",
+    "totalMarks": 100,
+    "duration": "2 hours",
+    "uploadDate": "2025-01-01"
+  },
+  {
+    "id": "paper-3",
+    "title": "Term Test 1 - 2025",
+    "type": "term-test",
+    "grade": "Grade 11",
+    "totalMarks": 100,
+    "duration": "2.5 hours",
+    "uploadDate": "2025-01-10"
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "mark-1",
+    "studentId": "std-001",
+    "paperId": "paper-1",
+    "paperName": "2024 Past Paper",
+    "type": "past-paper",
+    "date": "2025-01-05",
+    "score": 82,
+    "totalMarks": 100,
+    "rank": 3
+  },
+  {
+    "id": "mark-2",
+    "studentId": "std-001",
+    "paperId": "paper-2",
+    "paperName": "Monthly Test - January",
+    "type": "monthly-test",
+    "date": "2025-01-12",
+    "score": 75,
+    "totalMarks": 100,
+    "rank": 5
+  },
+  {
+    "id": "mark-3",
+    "studentId": "std-001",
+    "paperId": "paper-3",
+    "paperName": "Term Test 1",
+    "type": "term-test",
+    "date": "2025-01-18",
+    "score": 88,
+    "totalMarks": 100,
+    "rank": 2
+  }
+]

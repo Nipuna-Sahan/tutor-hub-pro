@@ -1,0 +1,37 @@
+{
+  "bankDetails": {
+    "bankName": "Bank of Ceylon",
+    "accountName": "Saman Perera",
+    "accountNumber": "1234567890",
+    "branch": "Colombo"
+  },
+  "plans": [
+    {
+      "id": "monthly",
+      "name": "Monthly Payment",
+      "description": "Pay month by month with flexibility",
+      "features": [
+        "Cancel anytime",
+        "No commitment",
+        "Full access to all materials"
+      ]
+    },
+    {
+      "id": "term",
+      "name": "Term Payment",
+      "description": "Save with 3-month advance payment",
+      "discount": "10%",
+      "features": [
+        "10% discount",
+        "Priority support",
+        "Free additional resources",
+        "Guaranteed seat for full term"
+      ]
+    }
+  ],
+  "onlinePayment": {
+    "available": false,
+    "comingSoon": true,
+    "message": "Online payment gateway integration coming soon!"
+  }
+}
