@@ -1,7 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Phone, Calendar, GraduationCap } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { FileUpload } from "@/components/FileUpload";
+import { Mail, Phone, Calendar, GraduationCap, Camera } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 interface ProfileHeaderProps {
   student: {
@@ -17,6 +22,9 @@ interface ProfileHeaderProps {
 }
 
 export const ProfileHeader = ({ student }: ProfileHeaderProps) => {
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+
   const getInitials = (name: string) => {
     return name
       .split(" ")
@@ -25,15 +33,48 @@ export const ProfileHeader = ({ student }: ProfileHeaderProps) => {
       .toUpperCase();
   };
 
+  const handleUpload = (file: File | null) => {
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setProfilePicture(imageUrl);
+      setOpen(false);
+      toast.success("Profile picture updated successfully");
+    }
+  };
+
   return (
     <Card>
       <CardContent className="pt-6">
         <div className="flex flex-col md:flex-row gap-6 items-start">
-          <Avatar className="w-24 h-24">
-            <AvatarFallback className="text-2xl bg-primary text-primary-foreground">
-              {getInitials(student.name)}
-            </AvatarFallback>
-          </Avatar>
+          <div className="relative">
+            <Avatar className="w-24 h-24">
+              {profilePicture && <AvatarImage src={profilePicture} alt={student.name} />}
+              <AvatarFallback className="text-2xl bg-primary text-primary-foreground">
+                {getInitials(student.name)}
+              </AvatarFallback>
+            </Avatar>
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button
+                  size="icon"
+                  className="absolute -bottom-2 -right-2 rounded-full h-8 w-8"
+                  variant="secondary"
+                >
+                  <Camera className="w-4 h-4" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Upload Profile Picture</DialogTitle>
+                </DialogHeader>
+                <FileUpload
+                  accept="image/*"
+                  maxSize={2 * 1024 * 1024}
+                  onFileSelect={handleUpload}
+                />
+              </DialogContent>
+            </Dialog>
+          </div>
           
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">

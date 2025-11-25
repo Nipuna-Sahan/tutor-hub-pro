@@ -1,0 +1,58 @@
+[
+  {
+    "id": "att-1",
+    "studentId": "std-001",
+    "date": "2025-01-05",
+    "status": "present",
+    "class": "2025 O/L Revision"
+  },
+  {
+    "id": "att-2",
+    "studentId": "std-001",
+    "date": "2025-01-08",
+    "status": "present",
+    "class": "2025 O/L Revision"
+  },
+  {
+    "id": "att-3",
+    "studentId": "std-001",
+    "date": "2025-01-12",
+    "status": "absent",
+    "class": "2025 O/L Revision"
+  },
+  {
+    "id": "att-4",
+    "studentId": "std-001",
+    "date": "2025-01-15",
+    "status": "present",
+    "class": "2025 O/L Revision"
+  },
+  {
+    "id": "att-5",
+    "studentId": "std-001",
+    "date": "2025-01-19",
+    "status": "present",
+    "class": "2025 O/L Revision"
+  },
+  {
+    "id": "att-6",
+    "studentId": "std-002",
+    "date": "2025-01-05",
+    "status": "present",
+    "class": "Grade 10 O/L Preparation"
+  },
+  {
+    "id": "att-7",
+    "studentId": "std-002",
+    "date": "2025-01-08",
+    "status": "present",
+    "class": "Grade 10 O/L Preparation"
+  },
+  {
+    "id": "att-8",
+    "studentId": "std-002",
+    "date": "2025-01-12",
+    "status": "present",
+    "class": "Grade 10 O/L Preparation"
+  }
+]
