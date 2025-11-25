@@ -40,6 +40,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Plus, Pencil, Trash2, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { FileUpload } from "@/components/FileUpload";
 import resourcesData from "@/data/resources.json";
 
 const AdminResources = () => {
@@ -49,6 +50,7 @@ const AdminResources = () => {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const { toast } = useToast();
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     title: "",
     category: "notes",
@@ -65,6 +67,7 @@ const AdminResources = () => {
       description: "",
       downloadUrl: "",
     });
+    setSelectedFile(null);
   };
 
   const handleAdd = () => {
@@ -191,7 +194,19 @@ const AdminResources = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="downloadUrl">Download URL</Label>
+                <Label>Upload File</Label>
+                <FileUpload
+                  accept=".pdf,.doc,.docx,.ppt,.pptx"
+                  maxSize={10 * 1024 * 1024}
+                  onFileSelect={setSelectedFile}
+                  value={selectedFile}
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Or provide a download URL below
+                </p>
+              </div>
+              <div>
+                <Label htmlFor="downloadUrl">Download URL (Optional)</Label>
                 <Input
                   id="downloadUrl"
                   value={formData.downloadUrl}
@@ -300,7 +315,16 @@ const AdminResources = () => {
               />
             </div>
             <div>
-              <Label htmlFor="edit-downloadUrl">Download URL</Label>
+              <Label>Upload File</Label>
+              <FileUpload
+                accept=".pdf,.doc,.docx,.ppt,.pptx"
+                maxSize={10 * 1024 * 1024}
+                onFileSelect={setSelectedFile}
+                value={selectedFile}
+              />
+            </div>
+            <div>
+              <Label htmlFor="edit-downloadUrl">Download URL (Optional)</Label>
               <Input
                 id="edit-downloadUrl"
                 value={formData.downloadUrl}
