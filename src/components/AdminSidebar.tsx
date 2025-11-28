@@ -9,7 +9,8 @@ import {
   BarChart3,
   Calendar,
   DollarSign,
-  Video
+  Video,
+  MessageSquare
 } from "lucide-react";
 import {
   Sidebar,
@@ -35,6 +36,7 @@ const menuItems = [
   { title: "Attendance", url: "/admin/attendance", icon: Calendar },
   { title: "Payments", url: "/admin/payments", icon: DollarSign },
   { title: "Videos", url: "/admin/videos", icon: Video },
+  { title: "Messages", url: "/admin/messages", icon: MessageSquare },
 ];
 
 export function AdminSidebar() {

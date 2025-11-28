@@ -1,0 +1,76 @@
+[
+  {
+    "id": "msg-001",
+    "studentId": "std-001",
+    "studentName": "Sithumi Fernando",
+    "messages": [
+      {
+        "id": "m1",
+        "sender": "student",
+        "text": "Sir, I have a question about Chapter 5 - Chemical Reactions.",
+        "timestamp": "2024-12-20T10:30:00Z",
+        "read": true
+      },
+      {
+        "id": "m2",
+        "sender": "teacher",
+        "text": "Sure Sithumi, what would you like to know?",
+        "timestamp": "2024-12-20T11:15:00Z",
+        "read": true
+      },
+      {
+        "id": "m3",
+        "sender": "student",
+        "text": "I'm confused about the difference between exothermic and endothermic reactions. Can you explain?",
+        "timestamp": "2024-12-20T11:20:00Z",
+        "read": true
+      },
+      {
+        "id": "m4",
+        "sender": "teacher",
+        "text": "Exothermic reactions release energy (usually heat), while endothermic reactions absorb energy. For example, combustion is exothermic, and photosynthesis is endothermic. I'll cover this in detail in tomorrow's class.",
+        "timestamp": "2024-12-20T11:45:00Z",
+        "read": true
+      },
+      {
+        "id": "m5",
+        "sender": "student",
+        "text": "Thank you sir! That helps a lot.",
+        "timestamp": "2024-12-20T12:00:00Z",
+        "read": true
+      }
+    ],
+    "lastMessageTime": "2024-12-20T12:00:00Z",
+    "unreadCount": 0
+  },
+  {
+    "id": "msg-002",
+    "studentId": "std-002",
+    "studentName": "Ravindu Silva",
+    "messages": [
+      {
+        "id": "m1",
+        "sender": "student",
+        "text": "Sir, when is the next past paper session?",
+        "timestamp": "2024-12-21T14:30:00Z",
+        "read": true
+      },
+      {
+        "id": "m2",
+        "sender": "teacher",
+        "text": "Hi Ravindu, it's scheduled for this Saturday at 9 AM. Make sure to complete the practice problems before then.",
+        "timestamp": "2024-12-21T15:00:00Z",
+        "read": true
+      },
+      {
+        "id": "m3",
+        "sender": "student",
+        "text": "Okay sir, I'll prepare. Can I submit my assignment through this chat?",
+        "timestamp": "2024-12-21T15:30:00Z",
+        "read": false
+      }
+    ],
+    "lastMessageTime": "2024-12-21T15:30:00Z",
+    "unreadCount": 1
+  }
+]
