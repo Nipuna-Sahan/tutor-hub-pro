@@ -2,6 +2,7 @@ import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { PastPaperList } from "@/components/profile/PastPaperList";
 import { ProgressTracker } from "@/components/profile/ProgressTracker";
 import { PerformanceSummary } from "@/components/profile/PerformanceSummary";
+import { ProgressReport } from "@/components/ProgressReport";
 import studentsData from "@/data/students.json";
 import marksData from "@/data/marks.json";
 
@@ -9,6 +10,15 @@ const LMSProfile = () => {
   const studentId = "std-001"; // Mock student ID
   const student = studentsData.find(s => s.id === studentId)!;
   const studentMarks = marksData.filter(m => m.studentId === studentId);
+
+  const scores = studentMarks.map(m => m.score);
+  const stats = {
+    totalPapers: student.totalPapers,
+    averageScore: student.averageScore,
+    attendance: student.attendance,
+    highestScore: Math.max(...scores),
+    lowestScore: Math.min(...scores)
+  };
 
   const weeklyTasks = [
     { task: "Complete Chapter 5 Notes", completed: true },
@@ -27,6 +37,17 @@ const LMSProfile = () => {
       </div>
 
       <ProfileHeader student={student} />
+
+      <ProgressReport 
+        student={{
+          name: student.name,
+          id: student.id,
+          grade: student.grade,
+          class: student.class
+        }}
+        marks={studentMarks}
+        stats={stats}
+      />
 
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">

@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Clock, CheckCircle2, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
+import { useNotifications } from "@/contexts/NotificationContext";
 
 const assignments = [
   {
@@ -41,6 +42,7 @@ const LMSAssignments = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [notes, setNotes] = useState("");
   const [open, setOpen] = useState(false);
+  const { addNotification } = useNotifications();
 
   const handleSubmit = () => {
     if (!selectedFile) {
@@ -48,6 +50,16 @@ const LMSAssignments = () => {
       return;
     }
     toast.success("Assignment submitted successfully");
+    
+    // Add notification for submission confirmation
+    addNotification({
+      type: "assignment",
+      title: "Assignment Submitted",
+      message: "Your assignment has been successfully submitted for review.",
+      date: new Date().toISOString(),
+      link: "/lms/assignments"
+    });
+    
     setOpen(false);
     setSelectedFile(null);
     setNotes("");
