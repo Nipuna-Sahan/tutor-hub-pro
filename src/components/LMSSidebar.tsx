@@ -8,7 +8,8 @@ import {
   Upload, 
   Megaphone,
   BarChart3,
-  User
+  User,
+  MessageSquare
 } from "lucide-react";
 import {
   Sidebar,
@@ -30,6 +31,7 @@ const menuItems = [
   { title: "Attendance", url: "/lms/attendance", icon: Calendar },
   { title: "Assignments", url: "/lms/assignments", icon: Upload },
   { title: "Announcements", url: "/lms/announcements", icon: Megaphone },
+  { title: "Messages", url: "/lms/messages", icon: MessageSquare },
   { title: "My Performance", url: "/lms/performance", icon: BarChart3 },
   { title: "My Profile", url: "/lms/profile", icon: User },
 ];

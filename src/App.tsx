@@ -37,6 +37,8 @@ import LMSAssignments from "./pages/lms/LMSAssignments";
 import LMSAnnouncements from "./pages/lms/LMSAnnouncements";
 import LMSPerformance from "./pages/lms/LMSPerformance";
 import LMSProfile from "./pages/lms/LMSProfile";
+import LMSMessages from "./pages/lms/LMSMessages";
+import AdminMessages from "./pages/admin/AdminMessages";
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -69,6 +71,7 @@ const App = () => {
             <Route path="attendance" element={<AdminAttendance />} />
             <Route path="payments" element={<AdminPayments />} />
             <Route path="videos" element={<AdminVideos />} />
+            <Route path="messages" element={<AdminMessages />} />
           </Route>
           
           {/* LMS Routes */}
@@ -82,6 +85,7 @@ const App = () => {
             <Route path="announcements" element={<LMSAnnouncements />} />
             <Route path="performance" element={<LMSPerformance />} />
             <Route path="profile" element={<LMSProfile />} />
+            <Route path="messages" element={<LMSMessages />} />
           </Route>
           
           {/* 404 Route */}
