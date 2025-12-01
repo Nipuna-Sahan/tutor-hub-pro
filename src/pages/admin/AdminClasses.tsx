@@ -44,6 +44,7 @@ const AdminClasses = () => {
   const [formData, setFormData] = useState({
     title: "",
     grade: "",
+    institution: "",
     description: "",
     syllabus: "",
     timetable: "",
@@ -56,6 +57,7 @@ const AdminClasses = () => {
     setFormData({
       title: "",
       grade: "",
+      institution: "",
       description: "",
       syllabus: "",
       timetable: "",
@@ -70,6 +72,7 @@ const AdminClasses = () => {
       id: `class-${Date.now()}`,
       title: formData.title,
       grade: formData.grade,
+      institution: formData.institution,
       description: formData.description,
       syllabus: formData.syllabus.split("\n").filter(s => s.trim()),
       timetable: formData.timetable.split("\n").map(t => {
@@ -94,6 +97,7 @@ const AdminClasses = () => {
     setFormData({
       title: classItem.title,
       grade: classItem.grade,
+      institution: classItem.institution || "",
       description: classItem.description,
       syllabus: classItem.syllabus.join("\n"),
       timetable: classItem.timetable.map((t: any) => `${t.day} | ${t.time}`).join("\n"),
@@ -110,6 +114,7 @@ const AdminClasses = () => {
             ...c,
             title: formData.title,
             grade: formData.grade,
+            institution: formData.institution,
             description: formData.description,
             syllabus: formData.syllabus.split("\n").filter(s => s.trim()),
             timetable: formData.timetable.split("\n").map(t => {
@@ -171,6 +176,15 @@ const AdminClasses = () => {
                   id="grade"
                   value={formData.grade}
                   onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
+                />
+              </div>
+              <div>
+                <Label htmlFor="institution">District/Institution</Label>
+                <Input
+                  id="institution"
+                  value={formData.institution}
+                  onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
+                  placeholder="Colombo District"
                 />
               </div>
               <div>

@@ -177,10 +177,18 @@
     background-clip: text;
   }
   
-  /* Floating Animation */
-  .float {
-    animation: float 6s ease-in-out infinite;
-  }
+/* Floating Animation */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Grid Pattern Background */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, hsl(var(--primary) / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
   
   .float-delayed {
     animation: float 6s ease-in-out 2s infinite;

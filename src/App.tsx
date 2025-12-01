@@ -11,6 +11,7 @@ import ClassDetail from "./pages/ClassDetail";
 import Resources from "./pages/Resources";
 import Payment from "./pages/Payment";
 import Contact from "./pages/Contact";
+import StudyPacks from "./pages/StudyPacks";
 import NotFound from "./pages/NotFound";
 
 // Admin Pages
@@ -57,6 +58,7 @@ const App = () => {
           <Route path="/classes/:classId" element={<ClassDetail />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/study-packs" element={<StudyPacks />} />
           <Route path="/contact" element={<Contact />} />
           
           {/* Admin Routes */}

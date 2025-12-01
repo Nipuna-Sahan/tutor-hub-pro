@@ -3,6 +3,7 @@
     "id": "ol-revision-2025",
     "title": "2025 O/L Revision Programme",
     "grade": "Grade 11",
+    "institution": "Colombo District",
     "description": "Intensive revision programme covering the entire O/L syllabus with past paper discussions and exam strategies.",
     "syllabus": [
       "Complete O/L Syllabus Revision",
@@ -30,6 +31,7 @@
     "id": "grade-6-7",
     "title": "Grade 6-7 Foundation Science",
     "grade": "Grade 6-7",
+    "institution": "Gampaha District",
     "description": "Building strong scientific fundamentals with hands-on experiments and interactive learning.",
     "syllabus": [
       "Introduction to Scientific Method",
@@ -56,6 +58,7 @@
     "id": "grade-8-9",
     "title": "Grade 8-9 Advanced Science",
     "grade": "Grade 8-9",
+    "institution": "Colombo District",
     "description": "Comprehensive coverage of middle school science curriculum with focus on concept clarity.",
     "syllabus": [
       "Biology: Cells, Human Body Systems",
@@ -82,6 +85,7 @@
     "id": "grade-10",
     "title": "Grade 10 O/L Preparation",
     "grade": "Grade 10",
+    "institution": "Kalutara District",
     "description": "Early O/L preparation focusing on building strong fundamentals and exam techniques.",
     "syllabus": [
       "Complete Grade 10 Syllabus",
