@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Video, FileText, CheckSquare, Calendar, Award, TrendingUp } from "lucide-react";
+import { Video, FileText, CheckSquare, Calendar, Award, TrendingUp, Trophy, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import videosData from "@/data/videos.json";
 import resourcesData from "@/data/resources.json";
 import announcementsData from "@/data/announcements.json";
@@ -12,6 +14,10 @@ const LMSDashboard = () => {
   const avgScore = studentMarks.length > 0 
     ? Math.round(studentMarks.reduce((acc, m) => acc + m.score, 0) / studentMarks.length)
     : 0;
+  
+  // Check if student is in top 3
+  const latestMark = studentMarks.length > 0 ? studentMarks[studentMarks.length - 1] : null;
+  const isTopRanked = latestMark && latestMark.rank <= 3;
 
   return (
     <div className="space-y-6">
@@ -19,6 +25,27 @@ const LMSDashboard = () => {
         <h1 className="text-3xl font-bold">Welcome Back!</h1>
         <p className="text-muted-foreground">Continue your learning journey</p>
       </div>
+
+      {/* Top Rank Celebration */}
+      {isTopRanked && (
+        <Alert className="border-2 border-primary bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 animate-fade-in">
+          <Trophy className="h-5 w-5 text-primary animate-pulse-glow" />
+          <AlertDescription className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-base font-semibold">
+                🎉 Congratulations! You ranked #{latestMark.rank} in {latestMark.paperName}!
+              </span>
+              <Badge className="bg-primary hover:bg-primary/90">
+                <Star className="w-3 h-3 mr-1" />
+                Top Performer
+              </Badge>
+            </div>
+            <Link to="/lms/performance" className="text-primary hover:underline font-medium">
+              View Details →
+            </Link>
+          </AlertDescription>
+        </Alert>
+      )}
 
       {/* Quick Stats */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
