@@ -11,7 +11,8 @@ import {
   User,
   MessageSquare,
   GraduationCap,
-  Sparkles
+  Sparkles,
+  Trophy
 } from "lucide-react";
 import {
   Sidebar,
@@ -38,6 +39,7 @@ const menuItems = [
   { title: "Assignments", url: "/lms/assignments", icon: Upload, color: "text-info" },
   { title: "Announcements", url: "/lms/announcements", icon: Megaphone, color: "text-destructive" },
   { title: "Messages", url: "/lms/messages", icon: MessageSquare, color: "text-accent" },
+  { title: "Leaderboard", url: "/lms/leaderboard", icon: Trophy, color: "text-warning" },
   { title: "My Performance", url: "/lms/performance", icon: BarChart3, color: "text-success" },
   { title: "My Profile", url: "/lms/profile", icon: User, color: "text-primary" },
 ];
@@ -49,20 +51,20 @@ export function LMSSidebar() {
   return (
     <Sidebar collapsible="icon" className="border-r border-border/50">
       {/* Sidebar Header */}
-      <SidebarHeader className="p-4">
+      <SidebarHeader className="p-3 md:p-4">
         <Link to="/" className="flex items-center gap-3 group">
           <div className={cn(
             "flex items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent transition-all duration-300 group-hover:shadow-glow",
-            isCollapsed ? "w-10 h-10" : "w-12 h-12"
+            isCollapsed ? "w-10 h-10" : "w-10 h-10 md:w-12 md:h-12"
           )}>
             <GraduationCap className={cn(
               "text-white transition-all",
-              isCollapsed ? "w-5 h-5" : "w-6 h-6"
+              isCollapsed ? "w-5 h-5" : "w-5 h-5 md:w-6 md:h-6"
             )} />
           </div>
           {!isCollapsed && (
             <div className="overflow-hidden">
-              <h1 className="font-display font-bold text-lg leading-tight">Science Tutor</h1>
+              <h1 className="font-display font-bold text-base md:text-lg leading-tight">Science Tutor</h1>
               <p className="text-xs text-muted-foreground">Learning Portal</p>
             </div>
           )}
@@ -86,7 +88,7 @@ export function LMSSidebar() {
                       to={item.url} 
                       end 
                       className={cn(
-                        "flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200",
+                        "flex items-center gap-3 px-3 py-2 md:py-2.5 rounded-xl transition-all duration-200",
                         "hover:bg-muted/80 group",
                         isCollapsed && "justify-center px-2"
                       )}
@@ -96,15 +98,12 @@ export function LMSSidebar() {
                         <>
                           <div className={cn(
                             "flex items-center justify-center rounded-lg transition-all duration-200",
-                            isCollapsed ? "w-9 h-9" : "w-8 h-8",
+                            isCollapsed ? "w-9 h-9" : "w-7 h-7 md:w-8 md:h-8",
                             isActive 
                               ? "bg-primary text-white shadow-md" 
                               : `bg-muted/50 ${item.color} group-hover:bg-muted`
                           )}>
-                            <item.icon className={cn(
-                              "transition-all",
-                              isCollapsed ? "w-4 h-4" : "w-4 h-4"
-                            )} />
+                            <item.icon className="w-4 h-4" />
                           </div>
                           {!isCollapsed && (
                             <span className={cn(
@@ -126,9 +125,9 @@ export function LMSSidebar() {
       </SidebarContent>
 
       {/* Sidebar Footer */}
-      <SidebarFooter className="p-4">
+      <SidebarFooter className="p-3 md:p-4">
         {!isCollapsed && (
-          <div className="rounded-2xl bg-gradient-to-br from-primary/10 via-accent/5 to-transparent p-4 border border-border/50">
+          <div className="rounded-2xl bg-gradient-to-br from-primary/10 via-accent/5 to-transparent p-3 md:p-4 border border-border/50">
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="w-4 h-4 text-primary" />
               <span className="text-xs font-semibold text-primary">Pro Tip</span>
