@@ -7,7 +7,7 @@ import studentsData from "@/data/students.json";
 import marksData from "@/data/marks.json";
 
 const LMSProfile = () => {
-  const studentId = "std-001"; // Mock student ID
+  const studentId = "std-001";
   const student = studentsData.find(s => s.id === studentId)!;
   const studentMarks = marksData.filter(m => m.studentId === studentId);
 
@@ -30,10 +30,10 @@ const LMSProfile = () => {
   const badges = ["Perfect Attendance", "Top Performer", "Fast Learner"];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">My Profile</h1>
-        <p className="text-muted-foreground">View your academic profile and achievements</p>
+        <h1 className="text-2xl md:text-3xl font-bold font-display">My Profile</h1>
+        <p className="text-sm md:text-base text-muted-foreground">View your academic profile and achievements</p>
       </div>
 
       <ProfileHeader student={student} />
@@ -49,8 +49,8 @@ const LMSProfile = () => {
         stats={stats}
       />
 
-      <div className="grid lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
+      <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="lg:col-span-2 space-y-4 md:space-y-6">
           <PastPaperList papers={studentMarks} />
           <PerformanceSummary 
             totalPapers={student.totalPapers}
