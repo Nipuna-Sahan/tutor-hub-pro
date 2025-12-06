@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -37,7 +38,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil, Trash2, FileText, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import papersData from "@/data/papers.json";
 
@@ -126,24 +127,25 @@ const AdminPapers = () => {
       "monthly-test": "secondary",
       "term-test": "outline",
     };
-    return <Badge variant={variants[type] || "default"}>{type}</Badge>;
+    return <Badge variant={variants[type] || "default"} className="text-xs">{type}</Badge>;
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="space-y-4 md:space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
         <div>
-          <h1 className="text-3xl font-bold">Papers Management</h1>
-          <p className="text-muted-foreground">Manage past papers and tests</p>
+          <h1 className="text-xl md:text-3xl font-bold font-display">Papers</h1>
+          <p className="text-sm text-muted-foreground">Manage past papers and tests</p>
         </div>
         <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
           <DialogTrigger asChild>
-            <Button onClick={resetForm}>
+            <Button onClick={resetForm} className="w-full sm:w-auto">
               <Plus className="mr-2 h-4 w-4" />
               Add Paper
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+          <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Add New Paper</DialogTitle>
               <DialogDescription>Create a new test paper</DialogDescription>
@@ -200,59 +202,108 @@ const AdminPapers = () => {
                 </div>
               </div>
             </div>
-            <DialogFooter>
-              <Button onClick={handleAdd}>Add Paper</Button>
+            <DialogFooter className="flex-col sm:flex-row gap-2">
+              <Button onClick={handleAdd} className="w-full sm:w-auto">Add Paper</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
       </div>
 
-      <div className="border rounded-lg">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>Grade</TableHead>
-              <TableHead>Total Marks</TableHead>
-              <TableHead>Duration</TableHead>
-              <TableHead>Upload Date</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {papers.map((paper) => (
-              <TableRow key={paper.id}>
-                <TableCell className="font-medium">{paper.title}</TableCell>
-                <TableCell>{getTypeBadge(paper.type)}</TableCell>
-                <TableCell>{paper.grade}</TableCell>
-                <TableCell>{paper.totalMarks}</TableCell>
-                <TableCell>{paper.duration}</TableCell>
-                <TableCell>{paper.uploadDate}</TableCell>
-                <TableCell className="text-right">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleEdit(paper)}
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setDeletingId(paper.id)}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      {/* Mobile Card View */}
+      <div className="block md:hidden space-y-3">
+        {papers.map((paper) => (
+          <Card key={paper.id} className="border-border/50">
+            <CardContent className="p-4">
+              <div className="flex items-start justify-between gap-2 mb-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <FileText className="h-4 w-4 text-primary shrink-0" />
+                  <span className="font-medium text-sm truncate">{paper.title}</span>
+                </div>
+                {getTypeBadge(paper.type)}
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground mb-3">
+                <div>Grade: {paper.grade}</div>
+                <div>Marks: {paper.totalMarks}</div>
+                <div className="flex items-center gap-1">
+                  <Clock className="h-3 w-3" />
+                  {paper.duration}
+                </div>
+                <div>{paper.uploadDate}</div>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1"
+                  onClick={() => handleEdit(paper)}
+                >
+                  <Pencil className="h-4 w-4 mr-1" />
+                  Edit
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-destructive hover:bg-destructive/10"
+                  onClick={() => setDeletingId(paper.id)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
+      {/* Desktop Table View */}
+      <div className="hidden md:block border rounded-lg overflow-hidden">
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Title</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Grade</TableHead>
+                <TableHead>Total Marks</TableHead>
+                <TableHead>Duration</TableHead>
+                <TableHead>Upload Date</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {papers.map((paper) => (
+                <TableRow key={paper.id}>
+                  <TableCell className="font-medium">{paper.title}</TableCell>
+                  <TableCell>{getTypeBadge(paper.type)}</TableCell>
+                  <TableCell>{paper.grade}</TableCell>
+                  <TableCell>{paper.totalMarks}</TableCell>
+                  <TableCell>{paper.duration}</TableCell>
+                  <TableCell>{paper.uploadDate}</TableCell>
+                  <TableCell className="text-right">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleEdit(paper)}
+                    >
+                      <Pencil className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setDeletingId(paper.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+
+      {/* Edit Dialog */}
       <Dialog open={!!editingPaper} onOpenChange={() => { setEditingPaper(null); resetForm(); }}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Edit Paper</DialogTitle>
             <DialogDescription>Update the paper details</DialogDescription>
@@ -307,23 +358,24 @@ const AdminPapers = () => {
               </div>
             </div>
           </div>
-          <DialogFooter>
-            <Button onClick={handleUpdate}>Update Paper</Button>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
+            <Button onClick={handleUpdate} className="w-full sm:w-auto">Update Paper</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
+      {/* Delete Dialog */}
       <AlertDialog open={!!deletingId} onOpenChange={() => setDeletingId(null)}>
-        <AlertDialogContent>
+        <AlertDialogContent className="max-w-[95vw] sm:max-w-md">
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete the paper.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={() => deletingId && handleDelete(deletingId)}>
+          <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+            <AlertDialogCancel className="w-full sm:w-auto">Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={() => deletingId && handleDelete(deletingId)} className="w-full sm:w-auto">
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
