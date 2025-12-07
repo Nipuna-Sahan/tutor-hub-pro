@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { GraduationCap, Menu, X } from "lucide-react";
+import { GraduationCap, Menu, X , Moon, Sun} from "lucide-react";
 import { useState } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <nav className="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
@@ -12,7 +14,7 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2 font-bold text-xl">
             <GraduationCap className="w-8 h-8 text-primary" />
-            <span>Science Tutor</span>
+            <span>AshenScience</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -26,24 +28,40 @@ export const Navbar = () => {
             <Link to="/classes" className="text-sm font-medium hover:text-primary transition-colors">
               Classes
             </Link>
-            <Link to="/resources" className="text-sm font-medium hover:text-primary transition-colors">
+            {/* <Link to="/resources" className="text-sm font-medium hover:text-primary transition-colors">
               Resources
-            </Link>
+            </Link> */}
             <Link to="/study-packs" className="text-sm font-medium hover:text-primary transition-colors">
               Study Packs
             </Link>
-            <Link to="/payment" className="text-sm font-medium hover:text-primary transition-colors">
+            {/* <Link to="/payment" className="text-sm font-medium hover:text-primary transition-colors">
               Payment
-            </Link>
+            </Link> */}
             <Link to="/contact" className="text-sm font-medium hover:text-primary transition-colors">
               Contact
             </Link>
-            <Link to="/lms">
+            {/* <Link to="/lms">
               <Button size="sm">Student Login</Button>
             </Link>
             <Link to="/admin">
               <Button size="sm" variant="outline">Admin</Button>
+            </Link> */}
+            <Link to="/login">
+              <Button size="sm">LMS</Button>
             </Link>
+            {/* Dark Mode Toggle */}
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    onClick={toggleTheme}
+                    className="rounded-xl hover:bg-muted h-8 w-8 md:h-9 md:w-9"
+                  >
+                    {theme === 'dark' ? (
+                      <Sun className="w-4 h-4 text-warning" />
+                    ) : (
+                      <Moon className="w-4 h-4" />
+                    )}
+                  </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -79,13 +97,13 @@ export const Navbar = () => {
             >
               Classes
             </Link>
-            <Link
+            {/* <Link
               to="/resources"
               className="block text-sm font-medium hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Resources
-            </Link>
+            </Link> */}
             <Link
               to="/study-packs"
               className="block text-sm font-medium hover:text-primary transition-colors"
@@ -93,13 +111,13 @@ export const Navbar = () => {
             >
               Study Packs
             </Link>
-            <Link
+            {/* <Link
               to="/payment"
               className="block text-sm font-medium hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Payment
-            </Link>
+            </Link> */}
             <Link
               to="/contact"
               className="block text-sm font-medium hover:text-primary transition-colors"
@@ -107,7 +125,7 @@ export const Navbar = () => {
             >
               Contact
             </Link>
-            <Link to="/lms" onClick={() => setMobileMenuOpen(false)}>
+            {/* <Link to="/lms" onClick={() => setMobileMenuOpen(false)}>
               <Button className="w-full" size="sm">
                 Student Login
               </Button>
@@ -116,7 +134,23 @@ export const Navbar = () => {
               <Button className="w-full" size="sm" variant="outline">
                 Admin
               </Button>
+            </Link> */}
+            <Link to="/login">
+              <Button size="sm">LMS</Button>
             </Link>
+            {/* Dark Mode Toggle */}
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    onClick={toggleTheme}
+                    className="rounded-xl hover:bg-muted h-8 w-8 md:h-9 md:w-9"
+                  >
+                    {theme === 'dark' ? (
+                      <Sun className="w-4 h-4 text-warning" />
+                    ) : (
+                      <Moon className="w-4 h-4" />
+                    )}
+                  </Button>
           </div>
         )}
       </div>

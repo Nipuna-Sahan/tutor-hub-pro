@@ -1,14 +1,17 @@
 {
-  "name": "Mr. Saman Perera",
-  "title": "Science Tutor",
-  "photo": "/placeholder.svg",
-  "bio": "With over 15 years of experience teaching Science for O/L students, I am passionate about making complex concepts simple and engaging. My student-centered approach has helped hundreds of students achieve excellent results.",
-  "teachingStyle": "I believe in interactive learning, practical demonstrations, and personalized attention. Every student learns differently, and I adapt my teaching methods to ensure everyone understands the fundamentals.",
+  "name": "Ashen Srimal Jaywardhena",
+  "title": "AshenScience",
+  "photo": "/assets/ashen.jpeg",
+  "video":"/assets/intro.mp4",
+
+  "bio": "බේරුවල ආරියවංශ මහා විද්‍යාලයෙන් ප්‍රාථමික අධ්‍යාපනය හදාරා 5 ශ්‍රේණිය ශිෂ්‍යත්ව විභාගය සමත් වී පානදුර ශ්‍රී සුමංගල විද්‍යාලයට ඇතුළත් වී අ.පො.ස (සා/පෙළ) විභාගය A සාමාර්ථ 7ක් හා B සාමාර්ථ 2ක් සහිතව සමත්ව අ.පො.ස (උ/පෙළ) ජීව විද්‍යාව අංශයෙන් හදාරා විභාගය A සාමාර්ථ 2ක් හා B සාමාර්ථ 1ක් ලබාගෙන විශ්ව විද්‍යාල වරම් හිමිකරගත් අයෙකි. ශ්‍රී ලංකා වයඹ විශ්ව විද්‍යාලයෙන් ආහාර විද්‍යාව හා පෝෂණය පිළිබඳ ගෞරව උපාධිය, පංති සාමාර්ථයක් සහිතව අවසන් කර ඇත. එසේම විද්‍යා හා තොරතුරු තාක්ෂණ සරසවියෙන් (SITC CAMPUS) මනෝවිද්‍යාව හා උපදේශනය පිළිබඳ ඩිප්ලෝමාව සම්පූර්ණ කළ අයෙකි. ",
+
+  "teachingStyle": "මම interactive learning, ප්‍රායෝගික නිරූපණ සහ පුද්ගලාරෝපිත අවධානය විශ්වාස කරමි. සෑම සිසුවෙක්ම වෙනස් ලෙස ඉගෙන ගන්නා අතර, සෑම කෙනෙකුටම මූලික කරුණු තේරුම් ගැනීම සහතික කිරීම සඳහා මම මගේ ඉගැන්වීමේ ක්‍රම අනුවර්තනය කරමි",
   "achievements": [
     {
       "icon": "GraduationCap",
-      "title": "University of Colombo",
-      "description": "B.Sc. in Physics (Hons)"
+      "title": "University of Wayamba",
+      "description": "B.Sc. in Food Science and Nutrition (Hons)"
     },
     {
       "icon": "Award",
@@ -16,10 +19,11 @@
       "description": "Teaching O/L Science"
     },
     {
-      "icon": "Trophy",
-      "title": "Best Tutor Award",
-      "description": "2023 National Education Excellence"
-    }
+  "icon": "GraduationCap",
+  "title": "Diploma in Psychology and Counseling",
+  "description": "Adapting lessons to each student's learning style for better understanding"
+}
+
   ],
   "results": {
     "year": "2024",

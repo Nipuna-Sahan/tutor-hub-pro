@@ -8,7 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Progress } from "@/components/ui/progress";
 import { GraduationCap, Award, Trophy, BookOpen, Users, Star, Sparkles, TrendingUp, Target, Calendar, Clock, CheckCircle2, ArrowRight, Play, Send, MessageSquare, BarChart3, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import tutorData from "@/data/tutor.json";
 import announcementsData from "@/data/announcements.json";
@@ -19,6 +19,55 @@ const Home = () => {
   const [email, setEmail] = useState("");
   const [counts, setCounts] = useState({ students: 0, experience: 0, success: 0 });
   const [hasAnimated, setHasAnimated] = useState(false);
+  const videoRef = useRef(null);
+  const containerRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Toggle play/pause
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    // Update button visibility
+    const handlePlay = () => setIsPlaying(true);
+    const handlePauseOrEnd = () => setIsPlaying(false);
+
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("pause", handlePauseOrEnd);
+    video.addEventListener("ended", handlePauseOrEnd);
+
+    // Intersection Observer
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Auto-play only if user already clicked play
+          if (!video.paused && !video.ended) {
+            video.play();
+          }
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.5 } // 50% visibility triggers
+    );
+
+    if (containerRef.current) observer.observe(containerRef.current);
+
+    return () => {
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("pause", handlePauseOrEnd);
+      video.removeEventListener("ended", handlePauseOrEnd);
+      if (containerRef.current) observer.unobserve(containerRef.current);
+    };
+  }, []);
 
   // Animated counter effect
   useEffect(() => {
@@ -27,7 +76,7 @@ const Home = () => {
       const steps = 60;
       const interval = duration / steps;
       
-      const targets = { students: 500, experience: 15, success: 95 };
+      const targets = { students: 500, experience: 5, success: 95 };
       let currentStep = 0;
 
       const timer = setInterval(() => {
@@ -73,10 +122,10 @@ const Home = () => {
       question: "What is your teaching methodology?",
       answer: "I believe in interactive learning with practical demonstrations, personalized attention in small batches, and regular assessments. Each concept is explained with real-world applications to ensure deep understanding."
     },
-    {
-      question: "How many students are in each batch?",
-      answer: "I maintain small batch sizes of 15-20 students to ensure every student receives personalized attention and can clarify their doubts effectively."
-    },
+    // {
+    //   question: "How many students are in each batch?",
+    //   answer: "I maintain small batch sizes of 15-20 students to ensure every student receives personalized attention and can clarify their doubts effectively."
+    // },
     {
       question: "Do you provide study materials?",
       answer: "Yes! All students receive comprehensive study materials including notes, past papers, practice questions, and access to recorded video lessons through our online portal."
@@ -112,7 +161,7 @@ const Home = () => {
             <div className="space-y-8 animate-fade-in-up">
               <div className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm font-semibold text-primary">Excellence in Science Education Since 2008</span>
+                <span className="text-sm font-semibold text-primary">Excellence in Science Education Since 2017</span>
               </div>
               
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
@@ -162,14 +211,36 @@ const Home = () => {
               </div>
             </div>
             
-            <div className="flex justify-center lg:justify-end animate-slide-in-right">
+            <div 
+            ref={containerRef}
+            className="flex justify-center lg:justify-end animate-slide-in-right">
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-primary rounded-3xl blur-2xl opacity-30 animate-pulse-glow" />
-                <img 
+                {/* <img 
                   src={tutorData.photo} 
                   alt={tutorData.name}
                   className="relative rounded-3xl shadow-2xl w-full max-w-lg hover:scale-105 transition-transform duration-500"
-                />
+                /> */}
+                 {/* Video */}
+                  <video
+                    ref={videoRef}
+                    src={tutorData.video}
+                    className="relative rounded-3xl shadow-2xl w-[70vh] h-[70vh] max-w-lg object-cover"
+                    //muted
+                    playsInline
+                  />
+
+        {/* Custom Play Button */}
+        {!isPlaying && (
+          <button
+            onClick={togglePlay}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <div className="bg-white/20 backdrop-blur-md p-6 rounded-full border border-white/30 shadow-xl hover:scale-110 transition-transform">
+              <Play className="w-10 h-10 text-white" />
+            </div>
+          </button>
+        )}
                 {/* Floating Achievement Badge */}
                 <div className="absolute -bottom-6 -left-6 glass-card p-4 rounded-2xl animate-float shadow-xl">
                   <div className="flex items-center gap-3">
@@ -177,8 +248,8 @@ const Home = () => {
                       <Trophy className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <div className="font-bold font-display">Best Tutor Award</div>
-                      <div className="text-sm text-muted-foreground">2023 Excellence</div>
+                      <div className="font-bold font-display">Best Science Teacher</div>
+                      {/* <div className="text-sm text-muted-foreground">2023 Excellence</div> */}
                     </div>
                   </div>
                 </div>
@@ -457,7 +528,7 @@ const Home = () => {
               <div className="space-y-4">
                 {[
                   { icon: BookOpen, title: "Interactive Sessions", desc: "Practical demonstrations and real-world applications" },
-                  { icon: Users, title: "Small Batch Sizes", desc: "Maximum 20 students for personalized attention" },
+                  //{ icon: Users, title: "Small Batch Sizes", desc: "Maximum 20 students for personalized attention" },
                   { icon: Zap, title: "Regular Assessments", desc: "Weekly tests and monthly progress tracking" },
                   { icon: Star, title: "Comprehensive Materials", desc: "Notes, videos, and practice papers included" }
                 ].map((item, index) => (

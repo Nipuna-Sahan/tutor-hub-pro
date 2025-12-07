@@ -42,6 +42,8 @@ import LMSProfile from "./pages/lms/LMSProfile";
 import LMSMessages from "./pages/lms/LMSMessages";
 import LMSLeaderboard from "./pages/lms/LMSLeaderboard";
 import AdminMessages from "./pages/admin/AdminMessages";
+import Login from "./pages/login";
+import FloatingWhatsapp from "./components/FloatingWhatsapp";
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -52,6 +54,7 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
+             <FloatingWhatsapp />
           <BrowserRouter>
             <Routes>
               {/* Public Routes */}
@@ -63,6 +66,7 @@ const App = () => {
               <Route path="/payment" element={<Payment />} />
               <Route path="/study-packs" element={<StudyPacks />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/login" element={<Login />} />
               
               {/* Admin Routes */}
               <Route path="/admin" element={<AdminLayout />}>
