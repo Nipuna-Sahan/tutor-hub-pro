@@ -510,6 +510,7 @@ const Home = () => {
       </section>
 
       {/* Teaching Methodology */}
+      {/* Teaching Methodology */}
       <section className="py-24 bg-gradient-secondary">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
