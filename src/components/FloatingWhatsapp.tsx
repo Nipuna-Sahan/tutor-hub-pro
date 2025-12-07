@@ -1,7 +1,7 @@
 import { FaWhatsapp } from "react-icons/fa";
 
 const FloatingWhatsapp = () => {
-  const whatsappNumber = "94771234567"; // <-- add your number here (no +)
+  const whatsappNumber = "94711678229"; // <-- add your number here (no +)
 
   return (
     <a

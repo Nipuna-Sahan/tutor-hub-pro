@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 import { toast } from "sonner";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import grades from "@/data/classes.json";
 
 const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -53,7 +55,7 @@ const Contact = () => {
                         </div>
                         <div>
                           <h3 className="font-semibold mb-1">Phone / WhatsApp</h3>
-                          <p className="text-muted-foreground">077 123 4567</p>
+                          <p className="text-muted-foreground">+94711678229</p>
                           <p className="text-sm text-muted-foreground mt-1">
                             Available 9 AM - 8 PM daily
                           </p>
@@ -66,7 +68,7 @@ const Contact = () => {
                         </div>
                         <div>
                           <h3 className="font-semibold mb-1">Email</h3>
-                          <p className="text-muted-foreground">science@example.com</p>
+                          <p className="text-muted-foreground">ashensrimal287@gmail.com</p>
                           <p className="text-sm text-muted-foreground mt-1">
                             We'll respond within 24 hours
                           </p>
@@ -79,14 +81,14 @@ const Contact = () => {
                         </div>
                         <div>
                           <h3 className="font-semibold mb-1">Facebook Messenger</h3>
-                          <p className="text-muted-foreground">@sciencetutor</p>
+                          <p className="text-muted-foreground">@AshenScience</p>
                           <p className="text-sm text-muted-foreground mt-1">
                             Quick response during class hours
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-start gap-4">
+                      {/* <div className="flex items-start gap-4">
                         <div className="p-3 bg-primary/10 rounded-lg">
                           <MapPin className="w-5 h-5 text-primary" />
                         </div>
@@ -98,9 +100,9 @@ const Contact = () => {
                             Colombo, Sri Lanka
                           </p>
                         </div>
-                      </div>
+                      </div> */}
 
-                      <div className="flex items-start gap-4">
+                      {/* <div className="flex items-start gap-4">
                         <div className="p-3 bg-primary/10 rounded-lg">
                           <Clock className="w-5 h-5 text-primary" />
                         </div>
@@ -111,7 +113,7 @@ const Contact = () => {
                             Saturday - Sunday: 8 AM - 6 PM
                           </p>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </CardContent>
                 </Card>
@@ -137,7 +139,20 @@ const Contact = () => {
                       </div>
                       <div>
                         <Label htmlFor="grade">Grade Level</Label>
-                        <Input id="grade" placeholder="e.g., Grade 11" />
+                        {/* <Input id="grade" placeholder="e.g., Grade 11" /> */}
+                        <Select onValueChange={(value) => console.log("Selected:", value)}>
+                          <SelectTrigger id="grade">
+                            <SelectValue placeholder="Select grade" />
+                          </SelectTrigger>
+
+                          <SelectContent>
+                            {grades.map((g) => (
+                              <SelectItem key={g.id} value={g.grade}>
+                                {g.grade}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div>
                         <Label htmlFor="message">Message</Label>
@@ -168,13 +183,13 @@ const Contact = () => {
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Button size="lg" asChild>
-                <a href="https://wa.me/94771234567" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/94711678229" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-5 h-5 mr-2" />
                   WhatsApp Us
                 </a>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <a href="tel:+94771234567">
+                <a href="tel:+94711678229">
                   <Phone className="w-5 h-5 mr-2" />
                   Call Now
                 </a>

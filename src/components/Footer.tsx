@@ -10,7 +10,7 @@ export const Footer = () => {
           <div>
             <div className="flex items-center gap-2 font-bold text-xl mb-4">
               <GraduationCap className="w-8 h-8 text-primary" />
-              <span>Science Tutor</span>
+              <span>AshenScience</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Quality Science Education for O/L Success
@@ -27,12 +27,15 @@ export const Footer = () => {
               <Link to="/classes" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
                 Classes
               </Link>
-              <Link to="/resources" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/contact" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                Contact
+              </Link>
+              {/* <Link to="/resources" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
                 Resources
               </Link>
               <Link to="/payment" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
                 Payment
-              </Link>
+              </Link> */}
             </div>
           </div>
 
@@ -53,11 +56,11 @@ export const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Phone className="w-4 h-4" />
-                <span>077 123 4567</span>
+                <span>+94 71 167 8229</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="w-4 h-4" />
-                <span>science@example.com</span>
+                <span>ashensrimal287@gmail.com</span>
               </div>
               <div className="flex gap-3 mt-4">
                 <a href="#" className="p-2 bg-primary/10 rounded-full hover:bg-primary/20 transition-colors">
@@ -72,7 +75,7 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Science Tutor. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} AshenScience. All rights reserved.</p>
         </div>
       </div>
     </footer>
