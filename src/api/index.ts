@@ -1,0 +1,13 @@
+export { authApi } from "./auth";
+export { studentsApi } from "./students";
+export { messagesApi } from "./messages";
+export { assignmentsApi } from "./assignments";
+export { resourcesApi } from "./resources";
+export { marksApi } from "./marks";
+export { attendanceApi } from "./attendance";
+export { announcementsApi } from "./announcements";
+export { classesApi } from "./classes";
+export { papersApi } from "./papers";
+export { videosApi } from "./videos";
+export { notificationsApi } from "./notifications";
+export type * from "./types";
