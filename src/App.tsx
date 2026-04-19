@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Classes from "./pages/Classes";
@@ -46,63 +48,90 @@ import Login from "./pages/login";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
 
 const App = () => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: 1,
+            refetchOnWindowFocus: false,
+            staleTime: 30_000,
+          },
+        },
+      })
+  );
 
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-             <FloatingWhatsapp />
-          <BrowserRouter>
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/classes" element={<Classes />} />
-              <Route path="/classes/:classId" element={<ClassDetail />} />
-              <Route path="/resources" element={<Resources />} />
-              <Route path="/payment" element={<Payment />} />
-              <Route path="/study-packs" element={<StudyPacks />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<Login />} />
-              
-              {/* Admin Routes */}
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<AdminDashboard />} />
-                <Route path="students" element={<AdminStudents />} />
-                <Route path="classes" element={<AdminClasses />} />
-                <Route path="resources" element={<AdminResources />} />
-                <Route path="announcements" element={<AdminAnnouncements />} />
-                <Route path="papers" element={<AdminPapers />} />
-                <Route path="marks" element={<AdminMarks />} />
-                <Route path="attendance" element={<AdminAttendance />} />
-                <Route path="payments" element={<AdminPayments />} />
-                <Route path="videos" element={<AdminVideos />} />
-                <Route path="messages" element={<AdminMessages />} />
-              </Route>
-              
-              {/* LMS Routes */}
-              <Route path="/lms" element={<LMSLayout />}>
-                <Route index element={<LMSDashboard />} />
-                <Route path="videos" element={<LMSVideos />} />
-                <Route path="resources" element={<LMSResources />} />
-                <Route path="quizzes" element={<LMSQuizzes />} />
-                <Route path="attendance" element={<LMSAttendance />} />
-                <Route path="assignments" element={<LMSAssignments />} />
-                <Route path="announcements" element={<LMSAnnouncements />} />
-                <Route path="performance" element={<LMSPerformance />} />
-                <Route path="profile" element={<LMSProfile />} />
-                <Route path="messages" element={<LMSMessages />} />
-                <Route path="leaderboard" element={<LMSLeaderboard />} />
-              </Route>
-              
-              {/* 404 Route */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <FloatingWhatsapp />
+            <BrowserRouter>
+              <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/classes" element={<Classes />} />
+                <Route path="/classes/:classId" element={<ClassDetail />} />
+                <Route path="/resources" element={<Resources />} />
+                <Route path="/payment" element={<Payment />} />
+                <Route path="/study-packs" element={<StudyPacks />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login" element={<Login />} />
+
+                {/* Admin Routes (protected) */}
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute requireRole="admin">
+                      <AdminLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="students" element={<AdminStudents />} />
+                  <Route path="classes" element={<AdminClasses />} />
+                  <Route path="resources" element={<AdminResources />} />
+                  <Route path="announcements" element={<AdminAnnouncements />} />
+                  <Route path="papers" element={<AdminPapers />} />
+                  <Route path="marks" element={<AdminMarks />} />
+                  <Route path="attendance" element={<AdminAttendance />} />
+                  <Route path="payments" element={<AdminPayments />} />
+                  <Route path="videos" element={<AdminVideos />} />
+                  <Route path="messages" element={<AdminMessages />} />
+                </Route>
+
+                {/* LMS Routes (protected) */}
+                <Route
+                  path="/lms"
+                  element={
+                    <ProtectedRoute requireRole="student">
+                      <LMSLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<LMSDashboard />} />
+                  <Route path="videos" element={<LMSVideos />} />
+                  <Route path="resources" element={<LMSResources />} />
+                  <Route path="quizzes" element={<LMSQuizzes />} />
+                  <Route path="attendance" element={<LMSAttendance />} />
+                  <Route path="assignments" element={<LMSAssignments />} />
+                  <Route path="announcements" element={<LMSAnnouncements />} />
+                  <Route path="performance" element={<LMSPerformance />} />
+                  <Route path="profile" element={<LMSProfile />} />
+                  <Route path="messages" element={<LMSMessages />} />
+                  <Route path="leaderboard" element={<LMSLeaderboard />} />
+                </Route>
+
+                {/* 404 Route */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
