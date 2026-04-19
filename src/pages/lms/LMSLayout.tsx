@@ -6,11 +6,18 @@ import { LogOut, Sparkles, Moon, Sun, Menu } from "lucide-react";
 import { NotificationBell } from "@/components/NotificationBell";
 import { NotificationProvider } from "@/contexts/NotificationContext";
 import { useTheme } from "@/contexts/ThemeContext";
-import studentsData from "@/data/students.json";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LMSLayout = () => {
-  const student = studentsData[0];
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const student = { name: user?.name || "Student", grade: "", class: "" };
   const { theme, toggleTheme } = useTheme();
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login", { replace: true });
+  };
 
   return (
     <NotificationProvider>
@@ -69,6 +76,7 @@ const LMSLayout = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
+                    onClick={handleLogout}
                     className="rounded-xl hover:bg-destructive/10 hover:text-destructive h-8 w-8 md:h-9 md:w-9"
                   >
                     <LogOut className="w-4 h-4" />
