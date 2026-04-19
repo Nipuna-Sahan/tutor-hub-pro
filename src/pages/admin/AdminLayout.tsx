@@ -4,9 +4,17 @@ import { Outlet } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun, Shield, LogOut, Bell } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const AdminLayout = () => {
   const { theme, toggleTheme } = useTheme();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login", { replace: true });
+  };
 
   return (
     <SidebarProvider>
@@ -57,17 +65,18 @@ const AdminLayout = () => {
                 {/* Admin Info - Hidden on mobile */}
                 <div className="hidden md:flex items-center gap-3 pl-3 border-l border-border/50">
                   <div className="text-right">
-                    <p className="text-sm font-semibold">Administrator</p>
+                    <p className="text-sm font-semibold">{user?.name || "Administrator"}</p>
                     <p className="text-xs text-muted-foreground">Super Admin</p>
                   </div>
                   <div className="w-8 h-8 lg:w-9 lg:h-9 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center shrink-0">
-                    <span className="text-sm font-bold text-primary">A</span>
+                    <span className="text-sm font-bold text-primary">{user?.name?.charAt(0) || "A"}</span>
                   </div>
                 </div>
                 
                 <Button 
                   variant="ghost" 
                   size="icon" 
+                  onClick={handleLogout}
                   className="rounded-xl hover:bg-destructive/10 hover:text-destructive h-8 w-8 md:h-9 md:w-9"
                 >
                   <LogOut className="w-4 h-4" />
