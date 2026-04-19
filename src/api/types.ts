@@ -92,7 +92,8 @@ export interface Resource {
   description: string;
   category: string;
   grade: string;
-  fileUrl: string;
+  downloadUrl?: string;
+  fileUrl?: string;
   uploadDate: string;
 }
 
@@ -100,12 +101,14 @@ export interface Resource {
 export interface Mark {
   id: string;
   studentId: string;
-  studentName: string;
+  studentName?: string;
   paperId: string;
-  paperTitle: string;
+  paperName: string;
+  paperTitle?: string;
+  type: string;
   score: number;
   totalMarks: number;
-  rank?: number;
+  rank: number;
   date: string;
 }
 
@@ -115,28 +118,39 @@ export interface AttendanceRecord {
   studentId: string;
   date: string;
   status: "present" | "absent";
-  classId: string;
+  classId?: string;
+  class?: string;
 }
 
 // ============ Announcements ============
 export interface Announcement {
   id: string;
   title: string;
-  message: string;
+  content: string;
   date: string;
-  priority: "normal" | "high" | "urgent";
-  targetAudience: string;
-  active: boolean;
+  important: boolean;
 }
 
 // ============ Classes ============
+export interface ClassTimetableSlot {
+  day: string;
+  time: string;
+}
+
+export interface ClassFees {
+  monthly: string;
+  term: string;
+}
+
 export interface Class {
   id: string;
   title: string;
   grade: string;
-  fees: string;
-  syllabus: string;
-  timetable: string;
+  institution?: string;
+  description?: string;
+  syllabus: string[];
+  timetable: ClassTimetableSlot[];
+  fees: ClassFees;
   features: string[];
 }
 
@@ -145,22 +159,26 @@ export interface Paper {
   id: string;
   title: string;
   type: string;
-  subject: string;
   grade: string;
-  date: string;
   totalMarks: number;
   duration: string;
+  uploadDate?: string;
 }
 
 // ============ Videos ============
 export interface Video {
   id: string;
   title: string;
+  description?: string;
   subject: string;
+  grade?: string;
   duration: string;
-  url: string;
+  videoUrl?: string;
+  url?: string;
+  thumbnailUrl?: string;
   thumbnail?: string;
   uploadDate: string;
+  views?: number;
 }
 
 // ============ Notifications ============
@@ -172,6 +190,17 @@ export interface Notification {
   date: string;
   read: boolean;
   link?: string;
+}
+
+// ============ Tutor ============
+export interface Tutor {
+  name: string;
+  bio?: string;
+  qualifications?: string[];
+  experience?: string;
+  video?: string;
+  image?: string;
+  [key: string]: unknown;
 }
 
 // ============ File ============

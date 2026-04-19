@@ -10,4 +10,5 @@ export { classesApi } from "./classes";
 export { papersApi } from "./papers";
 export { videosApi } from "./videos";
 export { notificationsApi } from "./notifications";
+export { tutorApi } from "./tutor";
 export type * from "./types";
