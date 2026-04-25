@@ -115,6 +115,7 @@ const Classes = () => {
             </div>
           </div>
         </section>
+        </>)}
       </div>
 
       <Footer />
