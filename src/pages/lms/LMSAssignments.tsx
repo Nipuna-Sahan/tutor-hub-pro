@@ -9,60 +9,41 @@ import { Label } from "@/components/ui/label";
 import { Clock, CheckCircle2, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useNotifications } from "@/contexts/NotificationContext";
-
-const assignments = [
-  {
-    id: "asn-1",
-    title: "Chemical Reactions Worksheet",
-    description: "Complete exercises 1-10 from Chapter 5",
-    dueDate: "2025-02-01",
-    status: "pending",
-    subject: "Science"
-  },
-  {
-    id: "asn-2",
-    title: "Physics Problem Set",
-    description: "Solve problems related to motion and energy",
-    dueDate: "2025-01-28",
-    status: "submitted",
-    subject: "Physics",
-    submittedDate: "2025-01-26"
-  },
-  {
-    id: "asn-3",
-    title: "Biology Lab Report",
-    description: "Write a detailed report on the cell structure experiment",
-    dueDate: "2025-01-25",
-    status: "overdue",
-    subject: "Biology"
-  }
-];
+import { useAssignments, useSubmitAssignment } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const LMSAssignments = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [notes, setNotes] = useState("");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<string | null>(null);
   const { addNotification } = useNotifications();
 
-  const handleSubmit = () => {
+  const { data: assignments = [], isLoading, error } = useAssignments();
+  const submitAssignment = useSubmitAssignment();
+
+  const handleSubmit = async (assignmentId: string) => {
     if (!selectedFile) {
       toast.error("Please upload a file");
       return;
     }
-    toast.success("Assignment submitted successfully");
-    
-    // Add notification for submission confirmation
-    addNotification({
-      type: "assignment",
-      title: "Assignment Submitted",
-      message: "Your assignment has been successfully submitted for review.",
-      date: new Date().toISOString(),
-      link: "/lms/assignments"
-    });
-    
-    setOpen(false);
-    setSelectedFile(null);
-    setNotes("");
+    try {
+      await submitAssignment.mutateAsync({ id: assignmentId, file: selectedFile, notes });
+      toast.success("Assignment submitted successfully");
+
+      addNotification({
+        type: "assignment",
+        title: "Assignment Submitted",
+        message: "Your assignment has been successfully submitted for review.",
+        date: new Date().toISOString(),
+        link: "/lms/assignments"
+      });
+
+      setOpen(null);
+      setSelectedFile(null);
+      setNotes("");
+    } catch (err) {
+      toast.error((err as Error).message || "Failed to submit");
+    }
   };
 
   const getStatusBadge = (status: string) => {
@@ -81,6 +62,9 @@ const LMSAssignments = () => {
       </Badge>
     );
   };
+
+  if (isLoading) return <LoadingState message="Loading assignments..." />;
+  if (error) return <ErrorState message={(error as Error).message} />;
 
   return (
     <div className="space-y-6">
@@ -118,7 +102,7 @@ const LMSAssignments = () => {
                 </div>
                 
                 {assignment.status === "pending" && (
-                  <Dialog open={open} onOpenChange={setOpen}>
+                  <Dialog open={open === assignment.id} onOpenChange={(o) => setOpen(o ? assignment.id : null)}>
                     <DialogTrigger asChild>
                       <Button>Submit Assignment</Button>
                     </DialogTrigger>
@@ -145,8 +129,8 @@ const LMSAssignments = () => {
                             rows={3}
                           />
                         </div>
-                        <Button onClick={handleSubmit} className="w-full">
-                          Submit
+                        <Button onClick={() => handleSubmit(assignment.id)} className="w-full" disabled={submitAssignment.isPending}>
+                          {submitAssignment.isPending ? "Submitting..." : "Submit"}
                         </Button>
                       </div>
                     </DialogContent>

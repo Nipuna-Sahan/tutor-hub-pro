@@ -5,30 +5,32 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, DollarSign, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
-import classesData from "@/data/classes.json";
+import { useClasses } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const Classes = () => {
   const [selectedInstitution, setSelectedInstitution] = useState("all");
+  const { data: classesData = [], isLoading, error } = useClasses();
 
-  // Get list of institutions dynamically
   const institutions = [
     "all",
-    ...new Set(classesData.map((c) => c.institution))
+    ...new Set(classesData.map((c) => c.institution).filter(Boolean) as string[])
   ];
 
-  // Filter classes by institution
   const filteredClasses =
     selectedInstitution === "all"
       ? classesData
-      : classesData.filter(
-          (cls) => cls.institution === selectedInstitution
-        );
+      : classesData.filter((cls) => cls.institution === selectedInstitution);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
       <div className="flex-1">
+        {isLoading && <div className="container mx-auto px-4 py-12"><LoadingState message="Loading classes..." /></div>}
+        {error && <div className="container mx-auto px-4 py-12"><ErrorState message={(error as Error).message} /></div>}
+        {!isLoading && !error && (<>
+
         {/* Hero */}
         <section className="bg-gradient-to-br from-primary/10 to-accent/10 py-16">
           <div className="container mx-auto px-4">
@@ -113,6 +115,7 @@ const Classes = () => {
             </div>
           </div>
         </section>
+        </>)}
       </div>
 
       <Footer />

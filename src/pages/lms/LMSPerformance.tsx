@@ -15,13 +15,19 @@ import {
   BookOpen
 } from "lucide-react";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
-import marksData from "@/data/marks.json";
+import { useAuth } from "@/contexts/AuthContext";
+import { useMarks } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 import { cn } from "@/lib/utils";
 
 const LMSPerformance = () => {
-  const studentId = "std-001";
-  const studentMarks = marksData.filter(m => m.studentId === studentId);
-  
+  const { user } = useAuth();
+  const { data: studentMarks = [], isLoading, error } = useMarks(user?.id);
+
+  if (isLoading) return <LoadingState message="Loading performance data..." />;
+  if (error) return <ErrorState message={(error as Error).message} />;
+  if (studentMarks.length === 0) return <ErrorState message="No marks data available yet." />;
+
   const scores = studentMarks.map(m => m.score);
   const highestScore = Math.max(...scores);
   const lowestScore = Math.min(...scores);

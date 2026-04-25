@@ -4,9 +4,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Download, FileText, Calendar } from "lucide-react";
-import resourcesData from "@/data/resources.json";
+import { useResources } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const Resources = () => {
+  const { data: resourcesData = [], isLoading, error } = useResources();
+
   const categories = [
     { id: "notes", label: "Notes" },
     { id: "past-papers", label: "Past Papers" },
@@ -38,6 +41,9 @@ const Resources = () => {
         {/* Resources */}
         <section className="py-16">
           <div className="container mx-auto px-4">
+            {isLoading && <LoadingState message="Loading resources..." />}
+            {error && <ErrorState message={(error as Error).message} />}
+            {!isLoading && !error && (
             <div className="max-w-5xl mx-auto">
               <Tabs defaultValue="notes">
                 <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
@@ -84,6 +90,7 @@ const Resources = () => {
                 ))}
               </Tabs>
             </div>
+            )}
           </div>
         </section>
       </div>

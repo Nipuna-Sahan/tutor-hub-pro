@@ -3,9 +3,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Download, FileText, Calendar, FolderOpen, BookOpen, File, Sparkles } from "lucide-react";
-import resourcesData from "@/data/resources.json";
+import { useResources } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const LMSResources = () => {
+  const { data: resourcesData = [], isLoading, error } = useResources();
+
   const categories = [
     { id: "notes", label: "Notes", icon: BookOpen, color: "text-primary" },
     { id: "past-papers", label: "Past Papers", icon: FileText, color: "text-accent" },
@@ -16,6 +19,9 @@ const LMSResources = () => {
   const getResourcesByCategory = (category: string) => {
     return resourcesData.filter(r => r.category === category);
   };
+
+  if (isLoading) return <LoadingState message="Loading resources..." />;
+  if (error) return <ErrorState message={(error as Error).message} />;
 
   return (
     <div className="space-y-8">

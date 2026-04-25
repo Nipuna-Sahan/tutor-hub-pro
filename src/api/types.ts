@@ -193,13 +193,37 @@ export interface Notification {
 }
 
 // ============ Tutor ============
+export interface TutorAchievement {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface TutorTestimonial {
+  name: string;
+  grade: string;
+  text: string;
+  rating: number;
+}
+
+export interface TutorResults {
+  year: string;
+  grades: { A: number; B: number; C: number };
+}
+
 export interface Tutor {
   name: string;
+  title?: string;
   bio?: string;
-  qualifications?: string[];
-  experience?: string;
+  photo?: string;
   video?: string;
   image?: string;
+  teachingStyle?: string;
+  qualifications?: string[];
+  experience?: string;
+  achievements?: TutorAchievement[];
+  results?: TutorResults;
+  testimonials?: TutorTestimonial[];
   [key: string]: unknown;
 }
 

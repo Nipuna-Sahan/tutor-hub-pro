@@ -4,15 +4,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useParams, Navigate } from "react-router-dom";
 import { Clock, DollarSign, CheckCircle, BookOpen } from "lucide-react";
-import classesData from "@/data/classes.json";
+import { useClass } from "@/hooks/api";
+import { LoadingState } from "@/components/QueryState";
 
 const ClassDetail = () => {
   const { classId } = useParams();
-  const classItem = classesData.find(c => c.id === classId);
+  const { data: classItem, isLoading, error } = useClass(classId);
 
-  if (!classItem) {
-    return <Navigate to="/classes" />;
-  }
+  if (isLoading) return <div className="min-h-screen flex items-center justify-center"><LoadingState /></div>;
+  if (error || !classItem) return <Navigate to="/classes" />;
 
   return (
     <div className="min-h-screen flex flex-col">

@@ -2,9 +2,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Play, Clock, Eye, Video, PlayCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import videosData from "@/data/videos.json";
+import { useVideos } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const LMSVideos = () => {
+  const { data: videosData = [], isLoading, error } = useVideos();
+
+  if (isLoading) return <LoadingState message="Loading videos..." />;
+  if (error) return <ErrorState message={(error as Error).message} />;
+
   return (
     <div className="space-y-8">
       {/* Header */}

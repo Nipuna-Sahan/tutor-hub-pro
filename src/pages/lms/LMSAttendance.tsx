@@ -6,13 +6,19 @@ import { Progress } from "@/components/ui/progress";
 import { CheckCircle2, XCircle, CalendarDays, TrendingUp, Target, Award } from "lucide-react";
 import { useState } from "react";
 import { format } from "date-fns";
-import attendanceData from "@/data/attendance.json";
+import { useAuth } from "@/contexts/AuthContext";
+import { useStudentAttendance } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const LMSAttendance = () => {
-  const studentId = "std-001"; // Mock student ID
-  const studentAttendance = attendanceData.filter(a => a.studentId === studentId);
-  
+  const { user } = useAuth();
+  const { data: studentAttendance = [], isLoading, error } = useStudentAttendance(user?.id);
+
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+
+  if (isLoading) return <LoadingState message="Loading attendance..." />;
+  if (error) return <ErrorState message={(error as Error).message} />;
+
 
   // Calculate statistics
   const totalClasses = studentAttendance.length;
