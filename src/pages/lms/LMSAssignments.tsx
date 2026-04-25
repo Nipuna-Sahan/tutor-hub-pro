@@ -99,7 +99,7 @@ const LMSAssignments = () => {
                 </div>
                 
                 {assignment.status === "pending" && (
-                  <Dialog open={open} onOpenChange={setOpen}>
+                  <Dialog open={open === assignment.id} onOpenChange={(o) => setOpen(o ? assignment.id : null)}>
                     <DialogTrigger asChild>
                       <Button>Submit Assignment</Button>
                     </DialogTrigger>
@@ -126,8 +126,8 @@ const LMSAssignments = () => {
                             rows={3}
                           />
                         </div>
-                        <Button onClick={handleSubmit} className="w-full">
-                          Submit
+                        <Button onClick={() => handleSubmit(assignment.id)} className="w-full" disabled={submitAssignment.isPending}>
+                          {submitAssignment.isPending ? "Submitting..." : "Submit"}
                         </Button>
                       </div>
                     </DialogContent>
