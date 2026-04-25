@@ -15,6 +15,17 @@ import { motion } from "framer-motion";
 
 const Home = () => {
   const { toast } = useToast();
+  const { data: tutorApiData } = useTutor();
+  const { data: announcementsData = [] } = useAnnouncements();
+  const { data: classesData = [] } = useClasses();
+  const tutorData = tutorApiData || {
+    name: "Our Tutor",
+    video: "",
+    teachingStyle: "",
+    achievements: [] as Array<{ icon: string; title: string; description: string }>,
+    results: { year: "2024", grades: { A: 0, B: 0, C: 0 } },
+    testimonials: [] as Array<{ name: string; grade: string; text: string; rating: number }>,
+  };
   const [email, setEmail] = useState("");
   const [counts, setCounts] = useState({ students: 0, experience: 0, success: 0 });
   const [hasAnimated, setHasAnimated] = useState(false);
