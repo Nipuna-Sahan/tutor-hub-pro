@@ -1,24 +1,27 @@
 import { useState, useRef, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Send, MessageSquare, Sparkles, CheckCheck, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
-import messagesData from "@/data/messages.json";
-import studentsData from "@/data/students.json";
-import tutorData from "@/data/tutor.json";
+import { useConversations, useSendMessage, useTutor } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const LMSMessages = () => {
   const { toast } = useToast();
-  const studentId = "std-001"; // Mock student ID
-  const student = studentsData.find(s => s.id === studentId);
-  const conversationData = messagesData.find(c => c.studentId === studentId);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
-  const [messages, setMessages] = useState(conversationData?.messages || []);
+
+  const { data: conversations = [], isLoading, error } = useConversations();
+  const { data: tutorData } = useTutor();
+  const sendMessage = useSendMessage();
+
+  const conversation = conversations[0];
+  const messages = conversation?.messages || [];
   const [newMessage, setNewMessage] = useState("");
+
+  const tutorName = tutorData?.name || "Your Teacher";
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -26,27 +29,24 @@ const LMSMessages = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages.length]);
 
-  const handleSendMessage = () => {
-    if (!newMessage.trim()) return;
-
-    const message = {
-      id: `m${messages.length + 1}`,
-      sender: "student",
-      text: newMessage,
-      timestamp: new Date().toISOString(),
-      read: true
-    };
-
-    setMessages([...messages, message]);
-    setNewMessage("");
-
-    toast({
-      title: "Message sent",
-      description: "Your message has been sent to the teacher.",
-    });
+  const handleSendMessage = async () => {
+    if (!newMessage.trim() || !conversation) return;
+    try {
+      await sendMessage.mutateAsync({
+        conversationId: conversation.id,
+        text: newMessage,
+      });
+      setNewMessage("");
+      toast({ title: "Message sent", description: "Your message has been sent to the teacher." });
+    } catch (err) {
+      toast({ title: "Failed to send", description: (err as Error).message, variant: "destructive" });
+    }
   };
+
+  if (isLoading) return <LoadingState message="Loading messages..." />;
+  if (error) return <ErrorState message={(error as Error).message} />;
 
   return (
     <div className="space-y-8">
@@ -65,20 +65,19 @@ const LMSMessages = () => {
       </div>
 
       <Card className="border-border/50 overflow-hidden">
-        {/* Chat Header */}
         <CardHeader className="border-b border-border/50 bg-muted/30">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <Avatar className="w-12 h-12 border-2 border-primary/20">
                   <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white font-bold">
-                    {tutorData.name.split(' ').map(n => n[0]).join('')}
+                    {tutorName.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-success rounded-full border-2 border-card" />
               </div>
               <div>
-                <h3 className="font-bold font-display">{tutorData.name}</h3>
+                <h3 className="font-bold font-display">{tutorName}</h3>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <span>Science Tutor</span>
                   <Badge variant="secondary" className="text-xs bg-success/10 text-success border-success/20">
@@ -91,7 +90,6 @@ const LMSMessages = () => {
           </div>
         </CardHeader>
 
-        {/* Messages Area */}
         <CardContent className="p-0">
           <div className="h-[450px] overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-muted/20 to-transparent">
             {messages.length === 0 ? (
@@ -115,7 +113,7 @@ const LMSMessages = () => {
                     {msg.sender !== "student" && (
                       <Avatar className="w-8 h-8 shrink-0">
                         <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-xs">
-                          {tutorData.name.split(' ').map(n => n[0]).join('')}
+                          {tutorName.split(' ').map(n => n[0]).join('')}
                         </AvatarFallback>
                       </Avatar>
                     )}
@@ -144,7 +142,6 @@ const LMSMessages = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area */}
           <div className="p-4 border-t border-border/50 bg-card">
             <div className="flex gap-3">
               <Textarea
@@ -159,11 +156,11 @@ const LMSMessages = () => {
                   }
                 }}
               />
-              <Button 
-                onClick={handleSendMessage} 
-                size="icon" 
+              <Button
+                onClick={handleSendMessage}
+                size="icon"
                 className="h-[60px] w-[60px] rounded-xl shrink-0 shadow-md hover:shadow-lg transition-all"
-                disabled={!newMessage.trim()}
+                disabled={!newMessage.trim() || sendMessage.isPending}
               >
                 <Send className="h-5 w-5" />
               </Button>
