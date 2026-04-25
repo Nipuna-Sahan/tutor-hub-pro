@@ -90,6 +90,7 @@ const Resources = () => {
                 ))}
               </Tabs>
             </div>
+            )}
           </div>
         </section>
       </div>
