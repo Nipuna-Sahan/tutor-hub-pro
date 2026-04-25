@@ -10,9 +10,7 @@ import { GraduationCap, Award, Trophy, BookOpen, Users, Star, Sparkles, Trending
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
-import tutorData from "@/data/tutor.json";
-import announcementsData from "@/data/announcements.json";
-import classesData from "@/data/classes.json";
+import { useTutor, useAnnouncements, useClasses } from "@/hooks/api";
 import { motion } from "framer-motion";
 
 const Home = () => {
