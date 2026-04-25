@@ -12,7 +12,8 @@ import {
   MessageSquare,
   GraduationCap,
   Sparkles,
-  Trophy
+  Trophy,
+  ScrollText
 } from "lucide-react";
 import {
   Sidebar,
@@ -41,6 +42,7 @@ const menuItems = [
   { title: "Messages", url: "/lms/messages", icon: MessageSquare, color: "text-accent" },
   { title: "Leaderboard", url: "/lms/leaderboard", icon: Trophy, color: "text-warning" },
   { title: "My Performance", url: "/lms/performance", icon: BarChart3, color: "text-success" },
+  { title: "Exam Results", url: "/lms/exam-results", icon: ScrollText, color: "text-accent" },
   { title: "My Profile", url: "/lms/profile", icon: User, color: "text-primary" },
 ];
 
