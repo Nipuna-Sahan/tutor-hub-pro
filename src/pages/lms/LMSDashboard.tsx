@@ -5,12 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { AchievementBadges } from "@/components/AchievementBadges";
 import { motion } from "framer-motion";
-import videosData from "@/data/videos.json";
-import resourcesData from "@/data/resources.json";
-import announcementsData from "@/data/announcements.json";
-import marksData from "@/data/marks.json";
-import studentsData from "@/data/students.json";
-import classesData from "@/data/classes.json";
+import { useAuth } from "@/contexts/AuthContext";
+import { useVideos, useResources, useAnnouncements, useMarks, useStudents } from "@/hooks/api";
+import { LoadingState } from "@/components/QueryState";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -30,13 +27,22 @@ const itemVariants = {
 };
 
 const LMSDashboard = () => {
-  const studentId = "std-001";
-  const student = studentsData.find(s => s.id === studentId);
-  const studentMarks = marksData.filter(m => m.studentId === studentId);
-  const avgScore = studentMarks.length > 0 
+  const { user } = useAuth();
+  const { data: videosData = [], isLoading: vLoading } = useVideos();
+  const { data: resourcesData = [], isLoading: rLoading } = useResources();
+  const { data: announcementsData = [], isLoading: aLoading } = useAnnouncements();
+  const { data: studentMarks = [], isLoading: mLoading } = useMarks(user?.id);
+  const { data: studentsData = [], isLoading: sLoading } = useStudents();
+
+  if (vLoading || rLoading || aLoading || mLoading || sLoading) {
+    return <LoadingState message="Loading dashboard..." />;
+  }
+
+  const student = studentsData.find(s => s.id === user?.id);
+  const avgScore = studentMarks.length > 0
     ? Math.round(studentMarks.reduce((acc, m) => acc + m.score, 0) / studentMarks.length)
     : 0;
-  
+
   const latestMark = studentMarks.length > 0 ? studentMarks[studentMarks.length - 1] : null;
   const isTopRanked = latestMark && latestMark.rank <= 3;
 
