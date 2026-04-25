@@ -1,9 +1,15 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, AlertCircle, Megaphone, Bell, Sparkles } from "lucide-react";
-import announcementsData from "@/data/announcements.json";
+import { useAnnouncements } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const LMSAnnouncements = () => {
+  const { data: announcementsData = [], isLoading, error } = useAnnouncements();
+
+  if (isLoading) return <LoadingState message="Loading announcements..." />;
+  if (error) return <ErrorState message={(error as Error).message} />;
+
   const importantAnnouncements = announcementsData.filter(a => a.important);
   const regularAnnouncements = announcementsData.filter(a => !a.important);
 
