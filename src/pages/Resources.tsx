@@ -41,6 +41,9 @@ const Resources = () => {
         {/* Resources */}
         <section className="py-16">
           <div className="container mx-auto px-4">
+            {isLoading && <LoadingState message="Loading resources..." />}
+            {error && <ErrorState message={(error as Error).message} />}
+            {!isLoading && !error && (
             <div className="max-w-5xl mx-auto">
               <Tabs defaultValue="notes">
                 <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
