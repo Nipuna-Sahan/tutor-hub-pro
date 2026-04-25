@@ -5,9 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Trophy, Medal, Award, TrendingUp, Users, Crown, Sparkles, Filter } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import marksData from "@/data/marks.json";
-import studentsData from "@/data/students.json";
-import classesData from "@/data/classes.json";
+import { useMarks, useStudents, useClasses } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -24,9 +23,13 @@ const LMSLeaderboard = () => {
   const [institution, setInstitution] = useState<string>("all");
   const [grade, setGrade] = useState<string>("all");
 
-  const testTypes = useMemo(() => [...new Set(marksData.map(m => m.type))], []);
-  const institutions = useMemo(() => [...new Set(classesData.map(c => c.institution).filter(Boolean))] as string[], []);
-  const grades = useMemo(() => [...new Set(studentsData.map(s => s.grade))], []);
+  const { data: marksData = [], isLoading: l1, error: e1 } = useMarks();
+  const { data: studentsData = [], isLoading: l2, error: e2 } = useStudents();
+  const { data: classesData = [], isLoading: l3, error: e3 } = useClasses();
+
+  const testTypes = useMemo(() => [...new Set(marksData.map(m => m.type))], [marksData]);
+  const institutions = useMemo(() => [...new Set(classesData.map(c => c.institution).filter(Boolean))] as string[], [classesData]);
+  const grades = useMemo(() => [...new Set(studentsData.map(s => s.grade))], [studentsData]);
 
   const leaderboardData = useMemo(() => {
     let filteredMarks = [...marksData];
