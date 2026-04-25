@@ -27,6 +27,10 @@ const Classes = () => {
       <Navbar />
 
       <div className="flex-1">
+        {isLoading && <div className="container mx-auto px-4 py-12"><LoadingState message="Loading classes..." /></div>}
+        {error && <div className="container mx-auto px-4 py-12"><ErrorState message={(error as Error).message} /></div>}
+        {!isLoading && !error && (<>
+
         {/* Hero */}
         <section className="bg-gradient-to-br from-primary/10 to-accent/10 py-16">
           <div className="container mx-auto px-4">
