@@ -8,9 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Phone, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 import { toast } from "sonner";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
-import grades from "@/data/classes.json";
+import { useClasses } from "@/hooks/api";
 
 const Contact = () => {
+  const { data: grades = [] } = useClasses();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Message sent successfully! We'll get back to you soon.");
