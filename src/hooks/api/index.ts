@@ -105,6 +105,12 @@ export const useMarks = (studentId?: string) =>
     queryFn: () => marksApi.getAll(studentId),
   });
 
+export const useLeaderboard = (paperId?: string) =>
+  useQuery({
+    queryKey: ["marks", "leaderboard", paperId ?? "all"],
+    queryFn: () => marksApi.getLeaderboard(paperId),
+  });
+
 export const useCreateMark = () => {
   const qc = useQueryClient();
   return useMutation({
