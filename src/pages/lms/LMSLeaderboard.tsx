@@ -61,7 +61,10 @@ const LMSLeaderboard = () => {
     if (institution !== "all") leaderboard = leaderboard.filter(s => s.institution === institution);
 
     return leaderboard.sort((a, b) => b.average - a.average);
-  }, [testType, grade, institution]);
+  }, [testType, grade, institution, marksData, studentsData, classesData]);
+
+  if (l1 || l2 || l3) return <LoadingState message="Loading leaderboard..." />;
+  if (e1 || e2 || e3) return <ErrorState message="Failed to load leaderboard data." />;
 
   const formatType = (type: string) => type.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
