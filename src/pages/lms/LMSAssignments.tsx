@@ -63,6 +63,9 @@ const LMSAssignments = () => {
     );
   };
 
+  if (isLoading) return <LoadingState message="Loading assignments..." />;
+  if (error) return <ErrorState message={(error as Error).message} />;
+
   return (
     <div className="space-y-6">
       <div>
