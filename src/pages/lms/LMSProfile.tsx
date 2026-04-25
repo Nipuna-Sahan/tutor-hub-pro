@@ -3,21 +3,30 @@ import { PastPaperList } from "@/components/profile/PastPaperList";
 import { ProgressTracker } from "@/components/profile/ProgressTracker";
 import { PerformanceSummary } from "@/components/profile/PerformanceSummary";
 import { ProgressReport } from "@/components/ProgressReport";
-import studentsData from "@/data/students.json";
-import marksData from "@/data/marks.json";
+import { useStudents, useMarks } from "@/hooks/api";
+import { useAuth } from "@/contexts/AuthContext";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const LMSProfile = () => {
-  const studentId = "std-001";
-  const student = studentsData.find(s => s.id === studentId)!;
-  const studentMarks = marksData.filter(m => m.studentId === studentId);
+  const { user } = useAuth();
+  const studentId = user?.id ?? "";
+  const { data: students = [], isLoading: sLoading, error: sError } = useStudents();
+  const { data: allMarks = [], isLoading: mLoading, error: mError } = useMarks(studentId);
 
-  const scores = studentMarks.map(m => m.score);
+  if (sLoading || mLoading) return <LoadingState />;
+  if (sError || mError) return <ErrorState message="Failed to load profile" />;
+
+  const student = students.find((s) => s.id === studentId);
+  if (!student) return <ErrorState message="Student record not found" />;
+
+  const studentMarks = allMarks.filter((m) => m.studentId === studentId);
+  const scores = studentMarks.map((m) => m.score);
   const stats = {
     totalPapers: student.totalPapers,
     averageScore: student.averageScore,
     attendance: student.attendance,
-    highestScore: Math.max(...scores),
-    lowestScore: Math.min(...scores)
+    highestScore: scores.length ? Math.max(...scores) : 0,
+    lowestScore: scores.length ? Math.min(...scores) : 0,
   };
 
   const weeklyTasks = [
@@ -38,13 +47,8 @@ const LMSProfile = () => {
 
       <ProfileHeader student={student} />
 
-      <ProgressReport 
-        student={{
-          name: student.name,
-          id: student.id,
-          grade: student.grade,
-          class: student.class
-        }}
+      <ProgressReport
+        student={{ name: student.name, id: student.id, grade: student.grade, class: student.class }}
         marks={studentMarks}
         stats={stats}
       />
@@ -52,15 +56,15 @@ const LMSProfile = () => {
       <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
         <div className="lg:col-span-2 space-y-4 md:space-y-6">
           <PastPaperList papers={studentMarks} />
-          <PerformanceSummary 
+          <PerformanceSummary
             totalPapers={student.totalPapers}
             averageScore={student.averageScore}
             badges={badges}
           />
         </div>
-        
+
         <div>
-          <ProgressTracker 
+          <ProgressTracker
             pendingPapers={3}
             weeklyTasks={weeklyTasks}
             attendance={student.attendance}

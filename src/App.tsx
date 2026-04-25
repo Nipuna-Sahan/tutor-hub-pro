@@ -43,6 +43,7 @@ import LMSPerformance from "./pages/lms/LMSPerformance";
 import LMSProfile from "./pages/lms/LMSProfile";
 import LMSMessages from "./pages/lms/LMSMessages";
 import LMSLeaderboard from "./pages/lms/LMSLeaderboard";
+import LMSExamResults from "./pages/lms/LMSExamResults";
 import AdminMessages from "./pages/admin/AdminMessages";
 import Login from "./pages/login";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
@@ -124,6 +125,7 @@ const App = () => {
                   <Route path="profile" element={<LMSProfile />} />
                   <Route path="messages" element={<LMSMessages />} />
                   <Route path="leaderboard" element={<LMSLeaderboard />} />
+                  <Route path="exam-results" element={<LMSExamResults />} />
                 </Route>
 
                 {/* 404 Route */}

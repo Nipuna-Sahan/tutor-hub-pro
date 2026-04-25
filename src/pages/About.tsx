@@ -2,9 +2,13 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { GraduationCap, BookOpen, Target, Heart } from "lucide-react";
-import tutorData from "@/data/tutor.json";
+import { useTutor } from "@/hooks/api";
+import { LoadingState, ErrorState } from "@/components/QueryState";
 
 const About = () => {
+  const { data: tutorData, isLoading, error } = useTutor();
+  if (isLoading) return <LoadingState />;
+  if (error || !tutorData) return <ErrorState message="Failed to load tutor info" />;
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -53,7 +57,7 @@ const About = () => {
               Qualifications & Experience
             </h2>
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {tutorData.achievements.map((achievement, index) => {
+              {tutorData.achievements?.map((achievement, index) => {
                 const Icon = achievement.icon === "GraduationCap" ? GraduationCap :
                             achievement.icon === "Award" ? BookOpen : Target;
                 return (
@@ -146,24 +150,24 @@ const About = () => {
               Proven Track Record
             </h2>
             <p className="text-muted-foreground mb-8">
-              {tutorData.results.year} O/L Science Results
+              {tutorData.results?.year} O/L Science Results
             </p>
             <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
               <div className="p-6 bg-success/10 rounded-xl border border-success/20">
                 <div className="text-5xl font-bold text-success mb-2">
-                  {tutorData.results.grades.A}
+                  {tutorData.results?.grades.A}
                 </div>
                 <p className="text-lg font-semibold">A Grades</p>
               </div>
               <div className="p-6 bg-info/10 rounded-xl border border-info/20">
                 <div className="text-5xl font-bold text-info mb-2">
-                  {tutorData.results.grades.B}
+                  {tutorData.results?.grades.B}
                 </div>
                 <p className="text-lg font-semibold">B Grades</p>
               </div>
               <div className="p-6 bg-warning/10 rounded-xl border border-warning/20">
                 <div className="text-5xl font-bold text-warning mb-2">
-                  {tutorData.results.grades.C}
+                  {tutorData.results?.grades.C}
                 </div>
                 <p className="text-lg font-semibold">C Grades</p>
               </div>

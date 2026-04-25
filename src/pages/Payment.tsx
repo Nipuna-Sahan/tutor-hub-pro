@@ -3,7 +3,30 @@ import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2, CheckCircle, Clock } from "lucide-react";
 import { ComingSoon } from "@/components/ComingSoon";
-import pricingData from "@/data/pricing.json";
+const pricingData = {
+  plans: [
+    {
+      id: "monthly",
+      name: "Monthly Plan",
+      description: "Pay month by month with flexibility",
+      features: ["4 classes per month", "Access to all study materials", "Past paper discussions", "WhatsApp support"],
+    },
+    {
+      id: "term",
+      name: "Term Plan",
+      description: "Best value — pay per term and save",
+      discount: "10%",
+      features: ["12 classes per term", "Access to all study materials", "Past paper discussions", "Priority support", "Free revision sessions"],
+    },
+  ],
+  bankDetails: {
+    bankName: "Bank of Ceylon",
+    branch: "Colombo Main",
+    accountName: "Tutor Academy",
+    accountNumber: "1234567890",
+  },
+  onlinePayment: { comingSoon: true },
+};
 
 const Payment = () => {
   return (
