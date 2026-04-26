@@ -46,6 +46,7 @@ import LMSLeaderboard from "./pages/lms/LMSLeaderboard";
 import LMSExamResults from "./pages/lms/LMSExamResults";
 import AdminMessages from "./pages/admin/AdminMessages";
 import Login from "./pages/login";
+import Register from "./pages/register";
 import FloatingWhatsapp from "./components/FloatingWhatsapp";
 
 const App = () => {
@@ -82,6 +83,7 @@ const App = () => {
                 <Route path="/study-packs" element={<StudyPacks />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
 
                 {/* Admin Routes (protected) */}
                 <Route
