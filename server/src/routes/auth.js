@@ -33,11 +33,22 @@ router.post(
 router.post(
   "/register",
   asyncHandler(async (req, res) => {
-    const { name, email, password, phone, grade, class: className } = req.body;
+    const { name, email, password, phone, grade, class: className, role, adminSecret } = req.body;
     if (!name || !email || !password) {
       res.status(400);
       throw new Error("Missing required fields");
     }
+
+    // Determine requested role (default: student). Admin requires the shared secret.
+    let finalRole = "student";
+    if (role === "admin") {
+      if (!process.env.ADMIN_SIGNUP_SECRET || adminSecret !== process.env.ADMIN_SIGNUP_SECRET) {
+        res.status(403);
+        throw new Error("Invalid admin signup secret");
+      }
+      finalRole = "admin";
+    }
+
     const exists = await User.findOne({ email: String(email).toLowerCase() });
     if (exists) {
       res.status(409);
@@ -50,17 +61,20 @@ router.post(
       phone,
       grade,
       class: className,
-      role: "student",
+      role: finalRole,
     });
-    // Auto-create matching Student profile
-    await Student.create({
-      user: user._id,
-      name,
-      email,
-      phone: phone || "",
-      grade: grade || "",
-      class: className || "",
-    });
+
+    // Auto-create matching Student profile only for students
+    if (finalRole === "student") {
+      await Student.create({
+        user: user._id,
+        name,
+        email,
+        phone: phone || "",
+        grade: grade || "",
+        class: className || "",
+      });
+    }
     res.status(201).json({ token: signToken(user._id), user: user.toPublic() });
   })
 );
