@@ -17,6 +17,8 @@ export interface RegisterRequest {
   phone: string;
   grade?: string;
   class?: string;
+  role?: "student" | "admin";
+  adminSecret?: string;
 }
 
 export interface User {
