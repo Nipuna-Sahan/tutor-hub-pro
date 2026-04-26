@@ -133,6 +133,13 @@ const Login: React.FC = () => {
             )}
             <span>{loading ? "Signing in..." : "Sign in"}</span>
           </button>
+
+          <p className="text-center text-sm text-muted-foreground mt-4">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-primary font-medium hover:underline">
+              Create one
+            </Link>
+          </p>
         </form>
       </motion.div>
     </div>
