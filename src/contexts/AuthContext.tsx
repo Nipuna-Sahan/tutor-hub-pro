@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("auth_token", response.token);
     localStorage.setItem("auth_user", JSON.stringify(response.user));
     setUser(response.user);
+    return response.user;
   };
 
   const register = async (data: RegisterRequest) => {
@@ -44,6 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("auth_token", response.token);
     localStorage.setItem("auth_user", JSON.stringify(response.user));
     setUser(response.user);
+    return response.user;
   };
 
   const logout = async () => {
