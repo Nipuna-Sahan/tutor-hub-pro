@@ -39,7 +39,13 @@ conversationSchema.set("toJSON", {
   virtuals: true,
   transform: (_d, r) => {
     r.id = r._id.toString();
-    r.studentId = r.student?.toString?.() || r.student;
+    // Safely expose studentId whether `student` is an ObjectId or a populated doc
+    if (r.student) {
+      r.studentId =
+        typeof r.student === "object" && r.student._id
+          ? r.student._id.toString()
+          : r.student.toString();
+    }
     delete r._id;
     delete r.__v;
     delete r.student;
