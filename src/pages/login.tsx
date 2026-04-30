@@ -14,7 +14,6 @@ const Login: React.FC = () => {
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [role, setRole] = useState<"student" | "admin">("student");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,12 +26,12 @@ const Login: React.FC = () => {
 
     setLoading(true);
     try {
-      await login({ email, password, role });
+      const user = await login({ email, password });
       toast.success("Welcome back!");
-      const redirectTo =
-        (location.state as { from?: { pathname: string } } | null)?.from?.pathname ||
-        (role === "admin" ? "/admin" : "/lms");
-      navigate(redirectTo, { replace: true });
+      const stateRedirect =
+        (location.state as { from?: { pathname: string } } | null)?.from?.pathname;
+      const fallback = user.role === "admin" ? "/admin" : "/lms";
+      navigate(stateRedirect || fallback, { replace: true });
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Login failed";
       setError(msg);
@@ -65,18 +64,6 @@ const Login: React.FC = () => {
         )}
 
         <form onSubmit={handleSubmit}>
-          <label className="block text-xs font-medium text-muted-foreground mb-1">
-            Login As
-          </label>
-          <select
-            className="w-full px-4 py-3 mb-3 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
-            onChange={(e) => setRole(e.target.value as "student" | "admin")}
-            value={role}
-          >
-            <option value="student">Student</option>
-            <option value="admin">Admin</option>
-          </select>
-
           <label className="block text-xs font-medium text-muted-foreground mb-1">
             Email
           </label>
