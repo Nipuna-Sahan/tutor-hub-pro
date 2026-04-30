@@ -6,8 +6,8 @@ interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (data: LoginRequest) => Promise<void>;
-  register: (data: RegisterRequest) => Promise<void>;
+  login: (data: LoginRequest) => Promise<User>;
+  register: (data: RegisterRequest) => Promise<User>;
   logout: () => Promise<void>;
   updateUser: (data: Partial<User>) => void;
 }
@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("auth_token", response.token);
     localStorage.setItem("auth_user", JSON.stringify(response.user));
     setUser(response.user);
+    return response.user;
   };
 
   const register = async (data: RegisterRequest) => {
@@ -44,6 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("auth_token", response.token);
     localStorage.setItem("auth_user", JSON.stringify(response.user));
     setUser(response.user);
+    return response.user;
   };
 
   const logout = async () => {
