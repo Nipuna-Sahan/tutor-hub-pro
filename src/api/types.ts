@@ -2,7 +2,6 @@
 export interface LoginRequest {
   email: string;
   password: string;
-  role: "student" | "admin";
 }
 
 export interface LoginResponse {

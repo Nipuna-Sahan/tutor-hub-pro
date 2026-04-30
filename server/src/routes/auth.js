@@ -11,7 +11,7 @@ const router = express.Router();
 router.post(
   "/login",
   asyncHandler(async (req, res) => {
-    const { email, password, role } = req.body;
+    const { email, password } = req.body;
     if (!email || !password) {
       res.status(400);
       throw new Error("Email and password required");
@@ -21,10 +21,8 @@ router.post(
       res.status(401);
       throw new Error("Invalid credentials");
     }
-    if (role && user.role !== role) {
-      res.status(403);
-      throw new Error(`This account is not a ${role} account`);
-    }
+    // Authenticate by credentials only — caller routes the user based on the
+    // role returned in the response. (Avoids confusing 403s.)
     res.json({ token: signToken(user._id), user: user.toPublic() });
   })
 );
